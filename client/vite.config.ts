@@ -7,15 +7,6 @@ import postcssPresetEnv from "postcss-preset-env";
 
 export default defineConfig({
   plugins: [react(), svgr({ exportAsDefault: true })],
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:4000/api",
-        changeOrigin: true,
-        rewrite: (path) => path.replace("/api", ""),
-      },
-    },
-  },
   css: {
     postcss: {
       plugins: [postcssPresetEnv()],

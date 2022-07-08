@@ -1,5 +1,6 @@
 export default async function graphqlFetch({ query, args }: { query: string; args?: object }) {
-  return fetch(`/api`, {
+  const URL = import.meta.env.PROD ? `/api` : `http://localhost:4000/api`;
+  return fetch(URL, {
     method: "POST",
     mode: "same-origin",
     headers: {
