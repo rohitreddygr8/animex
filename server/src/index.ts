@@ -6,7 +6,6 @@ import { graphqlHTTP } from "express-graphql";
 config({ path: "../config/.env" });
 const PORT = Number(process.env.PORT || 4000);
 const HOST = process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1";
-const ORIGIN_URL = process.env.NODE_ENV === "production" ? process.env.ORIGIN_URL : "127.0.0.1";
 const server = express();
 server.use(express.static("../../client/dist/"));
 
