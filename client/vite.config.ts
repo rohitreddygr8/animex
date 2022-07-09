@@ -4,7 +4,6 @@ import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 //@ts-ignore
 import postcssPresetEnv from "postcss-preset-env";
-
 export default defineConfig({
   plugins: [react(), svgr({ exportAsDefault: true })],
   css: {

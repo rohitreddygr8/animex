@@ -5,13 +5,8 @@ const GreetType = new GraphQLObjectType({
   fields: () => ({
     name: {
       type: GraphQLString,
-      args: {
-        name: {
-          type: GraphQLString,
-        },
-      },
-      resolve: (parents, args) => {
-        return `Hello there ${args.name}`;
+      resolve: (parent, args) => {
+        return `Hello there ${parent}`;
       },
     },
   }),
@@ -21,7 +16,15 @@ const QueryType = new GraphQLObjectType({
   name: "query",
   fields: () => ({
     greet: {
-      type: GraphQLString,
+      type: GreetType,
+      args: {
+        name: {
+          type: GraphQLString,
+        },
+      },
+      resolve: (parent, args) => {
+        return args.name;
+      },
     },
   }),
 });

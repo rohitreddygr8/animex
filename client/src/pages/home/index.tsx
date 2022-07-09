@@ -1,5 +1,5 @@
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./local.module.scss";
 
@@ -9,15 +9,14 @@ export default function Home() {
   useEffect(() => {
     graphqlFetch({
       query: `
-              query greetMe($name:String) {
-                greet(name:$name)
+              query{
+                greet(name:"Niga"){
+                  name
+                }
               }
     `,
-      args: {
-        name: "Clark Kent",
-      },
     }).then((res) => {
-      setVal(res?.greet);
+      setVal(res?.greet?.name);
     });
   }, []);
 
