@@ -10,7 +10,7 @@ const HOST = process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1";
 const server = express();
 
 server.use(cors());
-server.use(express.static("../client/dist/"));
+server.use(express.static("../../client/dist/"));
 
 server.use(
   "/api",

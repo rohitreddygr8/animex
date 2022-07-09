@@ -4,12 +4,9 @@
   "version": "0.0.0",
   "description": "Source code for Animex, a free anime streaming website made with react, sass, typescript, graphql, and express.",
   "type": "module",
-  "engines": {
-    "node": "v16.13.0"
-  },
   "scripts": {
-    "dev": "concurrently \"cd ./client && npm run dev\" \"cd ./dist && npx nodemon index.js\" \"npx tsc --watch \"",
-    "build": "concurrently \"cd ./client && npm run build\" \"npx tsc\"",
+    "dev": "concurrently \"cd ../client && npm run dev\" \"cd ./dist && npx nodemon index.js\" \"npx tsc --watch \"",
+    "build": "concurrently \"cd ../client && npm run build\" \"npx tsc\"",
     "start": "cd ./dist && node index.js",
     "preview": "concurrently \"npm run build\" \"npm run start\""
   },
@@ -37,6 +34,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/node": "^18.0.0",
     "concurrently": "^7.2.2",
