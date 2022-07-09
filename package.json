@@ -8,7 +8,7 @@
     "dev": "concurrently \"cd ./client && vite\" \"cd ./server/dist && npx nodemon index.js\" \"cd ./server && npx tsc --watch \"",
     "build": "concurrently \"cd ./client && tsc && vite build\" \"cd ./server && npx tsc\"",
     "start": "cd ./server/dist && node index.js",
-    "preview": "concurrently \"npm run build\" \"npm run start\"",
+    "preview": "npm run build && npm run start",
     "preview:client": "cd ./client && vite preview"
   },
   "repository": {
