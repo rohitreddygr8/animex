@@ -13,7 +13,7 @@ server.use(cors());
 server.use(express.static("../../client/dist/"));
 
 server.use(
-  "/api",
+  "/graphql",
   graphqlHTTP({
     schema: schema,
     graphiql: process.env.NODE_ENV !== "production",

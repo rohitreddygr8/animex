@@ -10,7 +10,7 @@ export default function Home() {
     graphqlFetch({
       query: `
               query{
-                greet(name:"Niga"){
+                greet(name:"Kanye West"){
                   name
                 }
               }
