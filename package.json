@@ -5,11 +5,11 @@
   "description": "Source code for Animex, a free anime streaming website made with react, sass, typescript, graphql, and express.",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"cd ./client && vite\" \"cd ./server && tsc --watch \" \"cd ./server/dist && nodemon index.js\"",
+    "dev": "concurrently \"cd ./client && vite\" \"cd ./server && tsc --watch \" \"cd ./server && tsc && cd ./dist && nodemon index.js\"",
     "build": "concurrently \"cd ./client && tsc && vite build\" \"cd ./server && tsc\"",
     "start": "cd ./server/dist && node index.js",
     "preview": "npm run build && npm run start",
-    "preview:client": "cd ./client && vite preview"
+    "preview-client": "cd ./client && vite preview"
   },
   "repository": {
     "type": "git",
