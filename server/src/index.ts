@@ -6,7 +6,7 @@ import schema from "./graphql-schema.js";
 
 config({ path: "../.env" });
 const PORT = Number(process.env.PORT || 4000);
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = process.env.LOCAL_ADDRESS || "127.0.0.1";
 const app = express();
 
 app.use(cors());
