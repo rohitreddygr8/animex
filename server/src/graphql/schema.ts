@@ -6,7 +6,7 @@ const GreetType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
       resolve: (parent, args) => {
-        return `${parent} is a superhero`;
+        return `${parent} is the greatest artist alive`;
       },
     },
   }),

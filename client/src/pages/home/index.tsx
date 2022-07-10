@@ -7,6 +7,13 @@ export default function Home() {
   const [val, setVal] = useState("");
 
   useEffect(() => {
+    const socket = new WebSocket("ws://127.0.0.1:4000");
+    socket.onopen = (e) => {
+      socket.send("Clark kent");
+      socket.onmessage = (e) => {
+        console.log(e.data);
+      };
+    };
     graphqlFetch({
       query: `
               query{
