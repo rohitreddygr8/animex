@@ -1,42 +1,27 @@
 import { config } from "dotenv";
-import schema from "./graphql/schema.js";
-import express from "express";
-import { graphqlHTTP } from "express-graphql";
 import cors from "cors";
-import { WebSocketServer } from "ws";
-import { createServer } from "http";
+import express from "express";
+import { graphql } from "graphql";
+import schema from "./graphql-schema.js";
 
 config({ path: "../.env" });
 const PORT = Number(process.env.PORT || 4000);
-const HOST = process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1";
-const server = createServer();
+const HOST = process.env.HOST || "127.0.0.1";
 const app = express();
 
-const wss = new WebSocketServer({ server }, () => {
-  console.log("websockets active");
-});
-
-wss.on("connection", function connection(ws) {
-  ws.on("message", function message(data) {
-    console.log(String(data));
-  });
-
-  ws.send("something");
-});
-
 app.use(cors());
+app.use(express.json());
 app.use(express.static("../../client/dist/"));
-
-app.use(
-  "/graphql",
-  graphqlHTTP({
+app.use("/graphql", (req, res, next) => {
+  graphql({
     schema: schema,
-    graphiql: process.env.NODE_ENV !== "production",
-  })
-);
-
-server.listen(PORT, HOST, () => {
-  console.log(`Server is listening to http://${HOST}:${PORT}`);
+    source: req.body.query,
+  }).then((response) => {
+    res.send(response.data);
+  });
+  next();
 });
 
-server.on("request", app);
+app.listen(PORT, HOST, () => {
+  console.log(`✨ SERVER IS RUNNING ON PORT http://${HOST}:${PORT} ✨`);
+});

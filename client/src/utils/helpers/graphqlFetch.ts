@@ -3,10 +3,9 @@ export default async function graphqlFetch({ query }: { query: string }) {
   return fetch(URL, {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ query }),
-  })
-    .then((res) => res.json())
-    .then((res) => res?.data);
+  }).then((res) => res.json());
 }
