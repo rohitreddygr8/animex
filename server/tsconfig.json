@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "checkJs": true,
     "strict": true,
     "module": "ES6",
+    "target": "ES6",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "target": "ES6",
-    "noImplicitAny": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "isolatedModules": true,
     "noEmitOnError": true,
     "outDir": "./dist",
@@ -22,7 +23,6 @@
     }
   },
   "include": [
-    "src",
-    "types"
+    "src/**/*"
   ]
 }

@@ -28,18 +28,23 @@
   "author": "rohitman47",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.27.2",
+    "binascii": "^0.0.2",
+    "cheerio": "^1.0.0-rc.10",
     "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "graphql": "^16.5.0",
+    "express-graphql": "^0.12.0",
+    "puppeteer": "^15.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-query": "^3.39.1",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "user-agents": "^1.0.1039"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
-    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.0",

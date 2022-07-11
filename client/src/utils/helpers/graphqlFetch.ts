@@ -1,11 +1,23 @@
-export default async function graphqlFetch({ query }: { query: string }) {
+export default async function graphqlFetch({
+  query,
+  variables,
+}: {
+  query: string;
+  variables?: object;
+}) {
   const URL = import.meta.env.PROD ? `/graphql` : `http://localhost:4000/graphql`;
-  return fetch(URL, {
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+  const response = await fetch(URL, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ query }),
-  }).then((res) => res.json());
+    body: JSON.stringify({ query, variables }),
+  });
+  const { data } = await response.json();
+  return data;
 }
