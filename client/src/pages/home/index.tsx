@@ -6,6 +6,21 @@ import styles from "./local.module.scss";
 
 export default function Home() {
   const queryClient = new QueryClient();
+  graphqlFetch({
+    query: `query Test($keyword:String!,$page:Int!){
+  search(keyword:$keyword,page:$page){
+    animeTitle
+    animeUrl
+    animeImg
+  }
+}`,
+    variables: {
+      keyword: "Attack",
+      page: 1,
+    },
+  }).then((res) => {
+    console.log(res);
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
