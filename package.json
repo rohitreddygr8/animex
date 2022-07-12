@@ -31,6 +31,7 @@
     "axios": "^0.27.2",
     "binascii": "^0.0.2",
     "cheerio": "^1.0.0-rc.10",
+    "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",

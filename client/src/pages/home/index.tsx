@@ -6,15 +6,14 @@ import styles from "./local.module.scss";
 export default function Home() {
   const queryClient = new QueryClient();
   graphqlFetch({
-    query: `query Test($keyword:String!,$page:Int!){
-  search(keyword:$keyword,page:$page){
+    query: `query Test($season:String!,$page:Int!){
+  season(season:$season,page:$page){
     animeTitle
-    animeUrl
     animeImg
   }
 }`,
     variables: {
-      keyword: "Attack",
+      season: "winter-2021-anime",
       page: 1,
     },
   }).then((res) => {

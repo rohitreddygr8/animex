@@ -20,5 +20,4 @@ export default defineConfig({
       "@utils": resolve(__dirname, "./src/utils"),
     },
   },
-  server: { open: true },
 });

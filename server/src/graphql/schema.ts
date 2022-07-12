@@ -9,17 +9,6 @@ import {
   GraphQLNonNull,
 } from "graphql";
 import {
-  animeMoviesType,
-  genreType,
-  newSeasonsType,
-  popularType,
-  recentReleasesType,
-  searchType,
-  seasonType,
-  topAiringType,
-  watchSourceType,
-} from "./sub-schema.js";
-import {
   scrapeGenre,
   scrapeTopAiringAnime,
   scrapeAnimeMovies,
@@ -29,16 +18,20 @@ import {
   scrapeSearch,
   scrapeAnimeDetails,
   scrapeSeason,
-  scrapeMP4,
-  scrapeStreamSB,
-  scrapeFembed,
-  scrapeThread,
-  scrapeDownloadLinks,
-  DownloadReferer,
 } from "../gogoanime-api/anime_parser.js";
+import AnimeDetailsType from "./anime-details.schema.js";
+import AnimeMoviesType from "./anime-movies.schema.js";
+import GenreType from "./genre.schema.js";
+import NewSeasonsType from "./new-seasons.schema.js";
+import PopularType from "./popular.schema.js";
+import RecentReleasesType from "./recent-releases.schema.js";
+import SearchType from "./search.schema.js";
+import SeasonType from "./season.schema.js";
+import TopAiringType from "./top-airings.schema.js";
+import WatchType from "./watch.schema.js";
 
-const genreEnumType = new GraphQLEnumType({
-  name: "genreEnum",
+const GenreEnum = new GraphQLEnumType({
+  name: "GenreEnum",
   values: {
     action: { value: "action" },
     adventure: { value: "adventure" },
@@ -64,7 +57,7 @@ const genreEnumType = new GraphQLEnumType({
     martialArts: { value: "martial-arts" },
     mecha: { value: "mecha" },
     military: { value: "military" },
-    Mmusic: { value: "Mmusic" },
+    music: { value: "music" },
     mystery: { value: "mystery" },
     parody: { value: "parody" },
     police: { value: "police" },
@@ -95,7 +88,7 @@ const queryType = new GraphQLObjectType({
   name: "query",
   fields: {
     search: {
-      type: new GraphQLList(searchType),
+      type: new GraphQLList(SearchType),
       args: {
         keyword: {
           type: new GraphQLNonNull(GraphQLString),
@@ -111,10 +104,10 @@ const queryType = new GraphQLObjectType({
     },
 
     recentReleases: {
-      type: new GraphQLList(recentReleasesType),
+      type: new GraphQLList(RecentReleasesType),
       args: {
-        type: {
-          type: new GraphQLNonNull(genreEnumType),
+        genre: {
+          type: new GraphQLNonNull(GenreEnum),
         },
         page: {
           type: new GraphQLNonNull(GraphQLInt),
@@ -127,7 +120,7 @@ const queryType = new GraphQLObjectType({
     },
 
     newSeasons: {
-      type: new GraphQLList(newSeasonsType),
+      type: new GraphQLList(NewSeasonsType),
       args: {
         page: {
           type: new GraphQLNonNull(GraphQLInt),
@@ -140,7 +133,7 @@ const queryType = new GraphQLObjectType({
     },
 
     popular: {
-      type: new GraphQLList(popularType),
+      type: new GraphQLList(PopularType),
       args: {
         page: {
           type: new GraphQLNonNull(GraphQLInt),
@@ -153,9 +146,9 @@ const queryType = new GraphQLObjectType({
     },
 
     animeMovies: {
-      type: new GraphQLList(animeMoviesType),
+      type: new GraphQLList(AnimeMoviesType),
       args: {
-        aph: {
+        keyword: {
           type: new GraphQLNonNull(GraphQLString),
         },
         page: {
@@ -163,13 +156,13 @@ const queryType = new GraphQLObjectType({
         },
       },
       resolve: async (parent, args) => {
-        const data = await scrapeAnimeMovies({ aph: args.aph, page: args.page });
+        const data = await scrapeAnimeMovies({ aph: args.keyword, page: args.page });
         return data;
       },
     },
 
     topAiring: {
-      type: new GraphQLList(topAiringType),
+      type: new GraphQLList(TopAiringType),
       args: {
         page: {
           type: new GraphQLNonNull(GraphQLInt),
@@ -182,7 +175,7 @@ const queryType = new GraphQLObjectType({
     },
 
     season: {
-      type: new GraphQLList(seasonType),
+      type: new GraphQLList(SeasonType),
       args: {
         season: {
           type: new GraphQLNonNull(GraphQLString),
@@ -198,10 +191,10 @@ const queryType = new GraphQLObjectType({
     },
 
     genre: {
-      type: new GraphQLList(genreType),
+      type: new GraphQLList(GenreType),
       args: {
         genre: {
-          type: new GraphQLNonNull(genreEnumType),
+          type: new GraphQLNonNull(GenreEnum),
         },
         page: {
           type: new GraphQLNonNull(GraphQLInt),
@@ -214,57 +207,28 @@ const queryType = new GraphQLObjectType({
     },
 
     animeDetails: {
-      type: searchType,
+      type: AnimeDetailsType,
       args: {
-        id: {
+        animeId: {
           type: GraphQLID,
         },
       },
       resolve: async (parent, args) => {
         //@ts-ignore
-        const data = await scrapeAnimeDetails({ id: args.id });
+        const data = await scrapeAnimeDetails({ id: args.animeId });
         return data;
       },
     },
 
     watch: {
-      type: watchSourceType,
+      type: WatchType,
       args: {
-        id: {
+        episodeId: {
           type: GraphQLID,
         },
       },
       resolve: async (parent, args) => {
         return args;
-      },
-    },
-
-    thread: {
-      type: searchType,
-      args: {
-        episodeId: {
-          type: GraphQLID,
-        },
-        page: {
-          type: new GraphQLNonNull(GraphQLInt),
-        },
-      },
-      resolve: async (parent, args) => {
-        const data = await scrapeThread({ episodeId: args.episodeId, page: args.page });
-        return data;
-      },
-    },
-
-    downloadLinks: {
-      type: searchType,
-      args: {
-        episodeId: {
-          type: GraphQLID,
-        },
-      },
-      resolve: async (parent, args) => {
-        const data = await scrapeDownloadLinks({ episodeId: args.episodeId });
-        return data;
       },
     },
   },
