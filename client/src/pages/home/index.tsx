@@ -1,5 +1,4 @@
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Link } from "react-router-dom";
 import styles from "./local.module.scss";

@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import cors from "cors";
+import helmet from "helmet";
 import express from "express";
 import schema from "./graphql/schema.js";
 import { graphqlHTTP } from "express-graphql";
@@ -9,18 +9,23 @@ const PORT = Number(process.env.PORT || 4000);
 const HOST = process.env.HOST || "127.0.0.1";
 const app = express();
 
-app.use(cors());
-app.use(express.json());
-app.use(express.static("../../client/dist/"));
+app.use(
+  helmet({
+    contentSecurityPolicy: process.env.NODE_ENV === "production",
+  }),
+  express.text(),
+  express.json(),
+  express.static("../../client/dist/")
+);
 
 app.use(
   "/graphql",
   graphqlHTTP({
-    schema,
-    graphiql: process.env.NODE_ENV !== "production",
+    schema: schema,
+    graphiql: process.env.NODE_ENV === "development",
   })
 );
 
 app.listen(PORT, HOST, () => {
-  console.log(`✨ Server is running on http://${HOST}:${PORT} ✨`);
+  console.log(`\n✨ Server is running on \u001b[35;1m http://${HOST}:${PORT} ✨`);
 });

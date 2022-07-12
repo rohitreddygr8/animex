@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"cd ./client && vite\" \"cd ./server && tsc --watch \" \"cd ./server && tsc && cd ./dist && nodemon index.js\"",
-    "build": "concurrently \"cd ./client && tsc && vite build\" \"cd ./server && tsc\"",
+    "build": "cd ./client && tsc && vite build && cd ../server && tsc",
     "start": "cd ./server/dist && node index.js",
-    "preview": "npm run build && npm run start",
+    "preview-server": "npm run build && npm run start",
     "preview-client": "cd ./client && vite preview"
   },
   "repository": {
@@ -31,11 +31,11 @@
     "axios": "^0.27.2",
     "binascii": "^0.0.2",
     "cheerio": "^1.0.0-rc.10",
-    "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-graphql": "^0.12.0",
+    "helmet": "^5.1.0",
     "puppeteer": "^15.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

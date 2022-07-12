@@ -11,6 +11,7 @@
     "module": "ESNext",
     "target": "ES6",
     "skipLibCheck": true,
+    "removeComments": true,
     "esModuleInterop": true,
     "useDefineForClassFields": true,
     "allowSyntheticDefaultImports": true,

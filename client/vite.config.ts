@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), svgr({ exportAsDefault: true })],
   css: {
     postcss: {
-      plugins: [postcssPresetEnv()],
+      plugins: [postcssPresetEnv({ stage: 1 })],
     },
   },
   resolve: {
@@ -20,4 +20,5 @@ export default defineConfig({
       "@utils": resolve(__dirname, "./src/utils"),
     },
   },
+  server: { open: true },
 });
