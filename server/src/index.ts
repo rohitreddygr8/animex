@@ -9,14 +9,7 @@ const PORT = Number(process.env.PORT || 4000);
 const HOST = process.env.HOST || "127.0.0.1";
 const app = express();
 
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  }),
-  express.text(),
-  express.json(),
-  express.static("../../client/dist/")
-);
+app.use(express.text(), express.json(), express.static("../../client/dist/"));
 
 app.use(
   "/graphql",
