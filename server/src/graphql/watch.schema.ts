@@ -105,7 +105,7 @@ const WatchType = new GraphQLObjectType({
         return data;
       },
     },
-    vidcn: {
+    vidcdn: {
       type: VidcdnSourceType,
       resolve: async (parent, args) => {
         const data = await scrapeMP4({ id: parent.episodeId });

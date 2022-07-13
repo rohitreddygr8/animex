@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from "react";
 import SearchResults from "@components/SearchResults";
 import debounce from "@utils/helpers/debounce";
 import testImgSrc from "@assets/images/maneki-neko.png";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [searchValue, setSearchValue] = useState("");
@@ -18,10 +19,12 @@ export default function Navbar() {
   return (
     <>
       <div className={styles["nav-bar"]}>
-        <div className={styles["logo"]}>
-          <img src={testImgSrc} alt="Logo" />
-          <h1>Animex</h1>
-        </div>
+        <Link to="/">
+          <div className={styles["logo"]}>
+            <img src={testImgSrc} alt="Logo" />
+            <h1>Animex</h1>
+          </div>
+        </Link>
         <div className={styles["search"]}>
           <div className={styles["search-bar"]}>
             <input type="text" placeholder="Search" onInput={handleInput} value={searchValue} />
