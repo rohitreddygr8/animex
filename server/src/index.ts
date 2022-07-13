@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   helmet({
-    contentSecurityPolicy: process.env.NODE_ENV === "production",
+    contentSecurityPolicy: false,
   }),
   express.text(),
   express.json(),
