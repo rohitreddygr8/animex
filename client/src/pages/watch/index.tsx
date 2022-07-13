@@ -36,11 +36,15 @@ export default function Watch() {
   return (
     <div className={styles["watch-page"]}>
       <div className="test">
-        <iframe
+        <video
+          src="https://fvs.io/redirector?token=eVVmNk93S2JpYWN5YmJScnhFMVNaMEcvRFQzYktmYndDZDZTZjFNbCtZcUV4OXk3VkxXQkdTQmhNMVZDdnFXaHA0ckIzUkc1SWxXSEVUS0VjVzIvTENOekgxZUpSK3ZDL3dUUlZ1VUlvTnVGQ1NWNVl1WTBkZzJEOCtzd2dtL3RzUE5WSllxeVZOYTNnNERrNlV3bXF4cHhIMC9sZ1NRSUorQT06dDVuL1M0VUVDZitDVkhUYTdRL29Edz090E7z"
+          controls
+        ></video>
+        {/* <iframe
           src={val}
           ref={testRef}
           style={{ border: 0, width: "100%", height: "100%", position: "absolute" }}
-        ></iframe>
+        ></iframe> */}
       </div>
     </div>
   );
