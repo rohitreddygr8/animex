@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "description": "Source code for Animex, a free anime streaming website made with react, sass, typescript, graphql, and express.",
   "type": "module",
+  "engines": {
+    "node": "16.13.0"
+  },
   "scripts": {
     "dev": "concurrently \"cd ./client && vite\" \"cd ./server && tsc --watch \" \"cd ./server && tsc && cd ./dist && nodemon index.js\"",
     "build": "cd ./client && tsc && vite build && cd ../server && tsc",
