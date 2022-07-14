@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./local.module.scss";
 import "@vime/core/themes/default.css";
 import { Hls, Player, Video } from "@vime/react";
+const BASE_URL = import.meta.env.PROD ? "" : "http://localhost:4000";
 
 export default function Watch() {
   const testRef = useRef<HTMLIFrameElement>(null);
@@ -28,7 +29,7 @@ export default function Watch() {
   }
 }`,
       variables: {
-        episodeId: "shingeki-no-kyojin-episode-1",
+        episodeId: "one-punch-man-episode-1",
       },
     });
     setReferer(res?.watch?.vidcdn?.referrer);
@@ -43,7 +44,7 @@ export default function Watch() {
         <Player controls>
           <Hls>
             <source
-              data-src={src && `http://localhost:4000/proxy?referer=${referer}&src=${src}`}
+              data-src={src && `${BASE_URL}/proxy?referer=${referer}&src=${src}`}
               type="application/vnd.apple.mpegurl"
             />
           </Hls>
