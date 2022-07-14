@@ -6,17 +6,12 @@ import { Hls, Player, Video } from "@vime/react";
 const BASE_URL = import.meta.env.PROD ? "" : "http://localhost:4000";
 
 export default function Watch() {
+  const inputRef = useRef<HTMLInputElement>(null);
   const testRef = useRef<HTMLIFrameElement>(null);
   const vidRef = useRef<HTMLVideoElement>(null);
   const [referer, setReferer] = useState("");
   const [src, setSrc] = useState("");
-
-  const options = {
-    headers: {
-      Referer: "https://ssbstream.net/e/6m6tnimse821",
-    },
-  };
-  const fetchFile = async () => {
+  const fetchSource = async (episodeId: string) => {
     const res = await graphqlFetch({
       query: `query Test($episodeId:ID!){
   watch(episodeId: $episodeId) {
@@ -29,17 +24,22 @@ export default function Watch() {
   }
 }`,
       variables: {
-        episodeId: "one-punch-man-episode-1",
+        episodeId: episodeId,
       },
     });
-    setReferer(res?.watch?.vidcdn?.referrer);
+    // setReferer(res?.watch?.vidcdn?.referrer);
     setSrc(res?.watch?.vidcdn?.sources[0]?.file);
   };
-  useEffect(() => {
-    fetchFile();
-  }, []);
   return (
     <div className={styles["watch-page"]}>
+      <input type="text" ref={inputRef} />
+      <button
+        onClick={() => {
+          fetchSource(inputRef.current?.value as string);
+        }}
+      >
+        GET
+      </button>
       <div className="test">
         <Player controls>
           <Hls>
