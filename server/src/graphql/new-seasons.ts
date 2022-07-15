@@ -1,7 +1,7 @@
-import { GraphQLID, GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
+import { GraphQLID, GraphQLList, GraphQLObjectType, GraphQLString } from "graphql";
 
-const SeasonType = new GraphQLObjectType({
-  name: "season",
+const NewSeasonType = new GraphQLObjectType({
+  name: "newSeasons",
   fields: {
     animeId: {
       type: GraphQLID,
@@ -30,4 +30,4 @@ const SeasonType = new GraphQLObjectType({
   },
 });
 
-export default SeasonType;
+export default NewSeasonType;

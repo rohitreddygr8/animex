@@ -3,7 +3,7 @@
     "allowJs": true,
     "strict": true,
     "module": "ESNext",
-    "target": "ES6",
+    "target": "es2017",
     "removeComments": true,
     "preserveWatchOutput": false,
     "esModuleInterop": true,

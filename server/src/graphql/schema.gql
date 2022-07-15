@@ -1,0 +1,202 @@
+schema {
+  query: query
+}
+
+type query {
+  """Gets a list of anime whose titles match the given keyword."""
+  search(keyword: String!, page: Int = 1): [search]
+
+  """Gets a list of recently released anime."""
+  recentReleases(genre: GenreEnum!, page: Int = 1): [recentReleases]
+
+  """Gets a list of new seasons of anime."""
+  newSeasons(page: Int = 1): [newSeasons]
+
+  """Gets a list of popular anime."""
+  popular(page: Int = 1): [popular]
+
+  """Gets a list of anime movies whose titles match the given keyword."""
+  animeMovies(keyword: String!, page: Int = 1): [animeMovies]
+
+  """Gets a list of current top airing anime."""
+  topAiring(page: Int = 1): [topAiring]
+
+  """Gets a list of anime which were released in the given season and year."""
+  season(season: season!, page: Int = 1): [season]
+
+  """Gets a list of anime belonging to the given genre."""
+  genre(genre: GenreEnum!, page: Int = 1): [genre]
+
+  """Gets details of the given anime ID."""
+  animeDetails(animeId: ID): animeDetails
+
+  """Gets streaming URLs for the given episode ID."""
+  watch(episodeId: ID): watch
+}
+
+type search {
+  animeId: ID
+  animeTitle: String
+  animeUrl: String
+  animeImg: String
+  status: String
+}
+
+type recentReleases {
+  episodeId: ID
+  animeTitle: String
+  episodeNum: String
+  subOrDub: String
+  animeImg: String
+  episodeUrl: String
+}
+
+enum GenreEnum {
+  action
+  adventure
+  cars
+  comedy
+  crime
+  dementia
+  demons
+  drama
+  dub
+  ecchi
+  family
+  fantasy
+  game
+  gourmet
+  harem
+  hentai
+  historical
+  horror
+  josei
+  kids
+  magic
+  martialArts
+  mecha
+  military
+  music
+  mystery
+  parody
+  police
+  psychological
+  romance
+  samurai
+  school
+  sciFi
+  seinen
+  shoujo
+  shoujoAi
+  shounen
+  shounenAi
+  sliceOfLife
+  space
+  sports
+  superPower
+  supernatural
+  suspense
+  thriller
+  vampire
+  yaoi
+  yuri
+}
+
+type newSeasons {
+  animeId: ID
+  animeTitle: String
+  animeImg: String
+  animeUrl: String
+  latestEp: String
+  genres: [String]
+}
+
+type popular {
+  animeId: ID
+  animeTitle: String
+  animeImg: String
+  animeUrl: String
+  releaseDate: String
+}
+
+type animeMovies {
+  animeId: ID
+  animeTitle: String
+  animeImg: String
+  animeUrl: String
+  releaseDate: String
+}
+
+type topAiring {
+  animeId: ID
+  animeTitle: String
+  animeImg: String
+  animeUrl: String
+  latestEp: String
+  genres: [String]
+}
+
+type season {
+  animeId: ID
+  animeTitle: String
+  animeImg: String
+  animeUrl: String
+  latestEp: String
+  genres: [String]
+}
+
+type genre {
+  animeId: ID
+  animeTitle: String
+  animeImg: String
+  animeUrl: String
+  releaseDate: String
+}
+
+type animeDetails {
+  animeId: ID
+  animeTitle: String
+  animeImg: String
+  animeUrl: String
+  type: String
+  releasedDate: String
+  status: String
+  genres: [String]
+  synopsis: String
+  totalEpisodes: String
+  episodesList: [episode]
+  otherNames: String
+}
+
+type episode {
+  episodeId: String
+  episodeNum: String
+  episodeUrl: String
+}
+
+type watch {
+  fembed: fembed
+  vidcdn: vidcdn
+  streamsb: streamsb
+}
+
+type fembed {
+  referrer: String
+  sources: [fembedData]
+}
+
+type fembedData {
+  file: String
+  label: String
+  type: String
+}
+
+type vidcdn {
+  referrer: String
+  sources: [fembedData]
+}
+
+type streamsb {
+  referrer: String
+  sources: [fembedData]
+}
