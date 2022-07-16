@@ -6,7 +6,7 @@ import styles from "./local.module.scss";
 
 export default function Home() {
   const queryClient = new QueryClient();
-
+  
   return (
     <QueryClientProvider client={queryClient}>
       <div className={styles["home-page"]}>

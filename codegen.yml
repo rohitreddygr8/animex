@@ -1,0 +1,11 @@
+schema: "../dist/graphql/schema.gql"
+generates:
+  ../src/types/graphql.d.ts:
+    - typescript
+    - typescript-resolvers
+    - typescript-operations
+    - typescript-react-query
+    - typed-document-node
+  ../../client/src/types/graphql.d.ts:
+    - typescript
+    - typescript-resolvers

@@ -5,7 +5,7 @@ export default async function graphqlFetch({
   query: string;
   variables?: object;
 }) {
-  const URL = import.meta.env.PROD ? `/graphql` : `http://localhost:4000/graphql`;
+  const URL = "/graphql";
   const response = await fetch(URL, {
     method: "POST",
     headers: {

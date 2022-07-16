@@ -5,15 +5,15 @@ const EpisodeType = new GraphQLObjectType({
   fields: {
     episodeId: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.episodeId,
+      resolve: (parent, _) => parent.episodeId,
     },
     episodeNum: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.episodeNum,
+      resolve: (parent, _) => parent.episodeNum,
     },
     episodeUrl: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.episodeUrl,
+      resolve: (parent, _) => parent.episodeUrl,
     },
   },
 });
@@ -23,50 +23,50 @@ const AnimeDetailsType = new GraphQLObjectType({
   fields: {
     animeId: {
       type: GraphQLID,
-      resolve: (parent, args) => parent.animeId,
+      resolve: (parent, _) => parent.animeId,
     },
     animeTitle: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.animeTitle,
+      resolve: (parent, _) => parent.animeTitle,
     },
     animeImg: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.animeImg,
+      resolve: (parent, _) => parent.animeImg,
     },
     animeUrl: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.animeUrl,
+      resolve: (parent, _) => parent.animeUrl,
     },
     type: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.type,
+      resolve: (parent, _) => parent.type,
     },
     releasedDate: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.releasedDate,
+      resolve: (parent, _) => parent.releasedDate,
     },
     status: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.status,
+      resolve: (parent, _) => parent.status,
     },
     genres: {
       type: new GraphQLList(GraphQLString),
-      resolve: (parent, args) => parent.genres,
+      resolve: (parent, _) => parent.genres,
     },
     synopsis: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.synopsis,
+      resolve: (parent, _) => parent.synopsis,
     },
     totalEpisodes: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.totalEpisodes,
+      resolve: (parent, _) => parent.totalEpisodes,
     },
     episodesList: {
       type: new GraphQLList(EpisodeType),
     },
     otherNames: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.otherNames,
+      resolve: (parent, _) => parent.otherNames,
     },
   },
 });

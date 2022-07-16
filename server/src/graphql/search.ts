@@ -5,23 +5,23 @@ const SearchType = new GraphQLObjectType({
   fields: {
     animeId: {
       type: GraphQLID,
-      resolve: (parent, args) => parent.animeId,
+      resolve: (parent, _) => parent.animeId,
     },
     animeTitle: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.animeTitle,
+      resolve: (parent, _) => parent.animeTitle,
     },
     animeUrl: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.animeUrl,
+      resolve: (parent, _) => parent.animeUrl,
     },
     animeImg: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.animeImg,
+      resolve: (parent, _) => parent.animeImg,
     },
     status: {
       type: GraphQLString,
-      resolve: (parent, args) => parent.status,
+      resolve: (parent, _) => parent.status,
     },
   },
 });

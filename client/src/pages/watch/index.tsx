@@ -1,34 +1,35 @@
+import VideoPlayer from "@components/VideoPlayer";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { useEffect, useRef, useState } from "react";
+import { useQuery } from "react-query";
+import { Query } from "../../types/graphql";
 import styles from "./local.module.scss";
-import "@vime/core/themes/default.css";
-import { Hls, Player, Video } from "@vime/react";
-const BASE_URL = import.meta.env.PROD ? "" : "http://localhost:4000";
+// import { Query } from "../../types/graphql";
 
 export default function Watch() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const testRef = useRef<HTMLIFrameElement>(null);
-  const vidRef = useRef<HTMLVideoElement>(null);
   const [referer, setReferer] = useState("");
   const [src, setSrc] = useState("");
+
   const fetchSource = async (episodeId: string) => {
     const res = await graphqlFetch({
       query: `query Test($episodeId:ID!){
-  watch(episodeId: $episodeId) {
-     vidcdn{
-      referrer
-      sources {
-        file
+      watch(episodeId: $episodeId) {
+         data{
+          referer
+          sources {
+            file
+          }
+        }
       }
-    }
-  }
-}`,
+    }`,
       variables: {
         episodeId: episodeId,
       },
     });
-    // setReferer(res?.watch?.vidcdn?.referrer);
-    setSrc(res?.watch?.vidcdn?.sources[0]?.file);
+
+    setReferer(res.watch?.data?.referer);
+    setSrc(res?.watch?.data?.sources[0]?.file);
   };
   return (
     <div className={styles["watch-page"]}>
@@ -40,16 +41,7 @@ export default function Watch() {
       >
         GET
       </button>
-      <div className="test">
-        <Player controls>
-          <Hls>
-            <source
-              data-src={src && `${BASE_URL}/proxy?referer=${referer}&src=${src}`}
-              type="application/vnd.apple.mpegurl"
-            />
-          </Hls>
-        </Player>
-      </div>
+      <VideoPlayer referer={referer} src={src} />
     </div>
   );
 }
