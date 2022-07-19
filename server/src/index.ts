@@ -13,7 +13,7 @@ const HOST = process.env.HOST || "127.0.0.1";
 const app = express();
 
 app.use(
-  helmet({ contentSecurityPolicy: process.env.NODE_ENV === "development" ? false : undefined }),
+  // helmet({ contentSecurityPolicy: process.env.NODE_ENV === "development" ? false : undefined }),
   cors(),
   express.text(),
   express.json(),
