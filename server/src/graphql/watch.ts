@@ -1,4 +1,4 @@
-import { scrapeMP4 } from "../gogoanime-api/anime_parser.js";
+import { scrapeMP4 } from "../libs/gogoanime-api/anime_parser.js";
 import { GraphQLObjectType, GraphQLString, GraphQLList } from "graphql";
 
 const SourcesType = new GraphQLObjectType({

@@ -1,3 +1,5 @@
+import { MODE } from "@constants";
+
 export default async function graphqlFetch({
   query,
   variables,
@@ -5,7 +7,7 @@ export default async function graphqlFetch({
   query: string;
   variables?: object;
 }) {
-  const URL = "/graphql";
+  const URL = MODE === "production" ? "/graphql" : "http://localhost:5500/graphql";
   const response = await fetch(URL, {
     method: "POST",
     headers: {

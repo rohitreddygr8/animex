@@ -1,4 +1,4 @@
-import styles from "./local.module.scss";
+import styles from "./styles.module.scss";
 import SearchIcon from "@assets/icons/search.svg";
 import { ChangeEvent, useState } from "react";
 import SearchResults from "@components/SearchResults";

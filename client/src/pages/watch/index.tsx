@@ -1,10 +1,8 @@
+import styles from "./styles.module.scss";
 import VideoPlayer from "@components/VideoPlayer";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { Query } from "../../types/graphql";
-import styles from "./local.module.scss";
-// import { Query } from "../../types/graphql";
 
 export default function Watch() {
   const inputRef = useRef<HTMLInputElement>(null);

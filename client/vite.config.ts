@@ -14,9 +14,11 @@ export default defineConfig({
   resolve: {
     alias: {
       "@assets": resolve(__dirname, "./src/assets"),
-      "@context": resolve(__dirname, "./src/context"),
+      "@constants": resolve(__dirname, "./src/app/constants.ts"),
+      "@context": resolve(__dirname, "./src/app/context.ts"),
       "@components": resolve(__dirname, "./src/components"),
       "@pages": resolve(__dirname, "./src/pages"),
+      "@store": resolve(__dirname, "./src/app/store.ts"),
       "@utils": resolve(__dirname, "./src/utils"),
     },
   },

@@ -1,3 +1,4 @@
+import styles from "./styles.module.scss";
 import { useEffect, useRef, useState } from "react";
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from "video.js";
 import "video.js/dist/video-js.css";
@@ -9,6 +10,7 @@ export default function VideoPlayer({ referer, src }: { referer: string; src: st
     controls: true,
     responsive: true,
     fluid: true,
+    autoplay: true,
     sources: [
       {
         src: `/proxy?referer=${referer}&src=${src}`,

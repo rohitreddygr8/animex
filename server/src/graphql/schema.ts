@@ -17,7 +17,7 @@ import {
   scrapeSearch,
   scrapeAnimeDetails,
   scrapeSeason,
-} from "../gogoanime-api/anime_parser.js";
+} from "../libs/gogoanime-api/anime_parser.js";
 import AnimeDetailsType from "./anime-details.js";
 import AnimeMoviesType from "./anime-movies.js";
 import { GenreEnum, SeasonEnum } from "./enums.js";

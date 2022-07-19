@@ -3,13 +3,13 @@
     "allowJs": true,
     "strict": true,
     "module": "ESNext",
-    "target": "ES2018",
+    "target": "ESNext",
     "removeComments": true,
     "preserveWatchOutput": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noImplicitReturns": true,
@@ -25,6 +25,6 @@
     }
   },
   "include": [
-    "src"
+    "src/**/*",
   ]
 }

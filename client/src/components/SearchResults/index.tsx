@@ -1,5 +1,5 @@
+import styles from "./styles.module.scss";
 import RenderIf from "@components/RenderIf";
-import styles from "./local.module.scss";
 import testImgSrc from "@assets/images/maneki-neko.png";
 
 export default function SearchResults({ value }: { value: string }) {

@@ -8,7 +8,7 @@
     "noEmit": true,
     "strict": true,
     "module": "ESNext",
-    "target": "ES2018",
+    "target": "ES2017",
     "skipLibCheck": true,
     "removeComments": true,
     "esModuleInterop": true,
@@ -28,8 +28,11 @@
       "@assets/*": [
         "./src/assets/*"
       ],
-      "@context/*": [
-        "./src/context/*"
+      "@constants": [
+        "./src/app/constants.ts"
+      ],
+      "@context": [
+        "./src/app/context.ts"
       ],
       "@components/*": [
         "./src/components/*"
@@ -37,17 +40,16 @@
       "@pages/*": [
         "./src/pages/*"
       ],
+      "@store": [
+        "./src/app/store.ts"
+      ],
       "@utils/*": [
         "./src/utils/*"
       ],
     }
   },
   "include": [
-    "src"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+    "src",
+    "vite.config.ts"
   ]
 }
