@@ -1,42 +1,19 @@
-import styles from "./styles.module.scss";
-import { useEffect, useRef, useState } from "react";
-import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from "video.js";
-import "video.js/dist/video-js.css";
+import "./styles.scss";
+import { memo, useEffect, useRef, useState } from "react";
+import { Hls, Player, Video } from "@vime/react";
 
-export default function VideoPlayer({ referer, src }: { referer: string; src: string }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const playerRef = useRef<VideoJsPlayer | null>(null);
-  const options: VideoJsPlayerOptions = {
-    controls: true,
-    responsive: true,
-    fluid: true,
-    autoplay: true,
-    sources: [
-      {
-        src: `/proxy?referer=${referer}&src=${src}`,
-        type: "application/vnd.apple.mpegurl",
-      },
-    ],
-  };
-
-  useEffect(() => {
-    if (videoRef.current) {
-      playerRef.current = videojs(videoRef.current, options);
-    }
-    return () => {
-      playerRef.current?.dispose();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (playerRef.current) {
-      playerRef.current.src({ src, type: "application/vnd.apple.mpegurl" });
-    }
-  }, [src]);
-
+function VideoPlayer({ referer, src }: { referer: string; src: string }) {
   return (
-    <div data-vjs-player>
-      {referer && src && <video ref={videoRef} className="video-js vjs-big-play-centered" />}
+    <div className="wrapper">
+      <div className="video-player">
+        <Player controls>
+          <Hls version="latest">
+            <source data-src={`${src}`} type="application/vnd.apple.mpegurl" />
+          </Hls>
+        </Player>
+      </div>
     </div>
   );
 }
+
+export default memo(VideoPlayer);

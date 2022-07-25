@@ -5,6 +5,9 @@
     display: flex;
     font-family: "General Sans";
     font-variation-settings: "wght" 500;
+    margin: 0.5em;
+
+
 
     & > input {
         background-color: transparent;
@@ -14,6 +17,12 @@
         color: var(--coral-100);
         border-radius: 0.4em;
         letter-spacing: 1px;
+        width: 10em;
+        transition: width 0.3s ease;
+
+        &:focus-within {
+            width: 20em;
+        }
 
         &::placeholder {
             color: white;
@@ -31,6 +40,7 @@
 
         svg {
             color: var(--coral-100);
+
         }
     }
 }

@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "@components/Layout";
 import Home from "@pages/home";
 import Watch from "@pages/watch";
+import AnimeDetailsPage from "@pages/anime-details";
 import { Provider } from "react-redux";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout children={<Home />} />} />
+        <Route path="/anime-details" element={<Layout children={<AnimeDetailsPage />} />} />
         <Route path="/watch" element={<Layout children={<Watch />} />} />
       </Routes>
     </BrowserRouter>

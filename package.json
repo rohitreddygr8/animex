@@ -33,10 +33,13 @@
   "license": "MIT",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
+    "@vime/core": "^5.3.1",
+    "@vime/react": "^5.3.1",
     "axios": "^0.27.2",
     "binascii": "^0.0.2",
     "cheerio": "^1.0.0-rc.10",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -49,9 +52,7 @@
     "react-query": "^3.39.1",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
-    "user-agents": "^1.0.1039",
-    "video.js": "^7.19.2",
-    "cross-env": "^7.0.3"
+    "user-agents": "^1.0.1039"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.8.1",

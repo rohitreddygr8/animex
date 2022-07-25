@@ -1,45 +1,19 @@
 import styles from "./styles.module.scss";
-import VideoPlayer from "@components/VideoPlayer";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
+import { useSearchParams } from "react-router-dom";
+import { AnimeDetails, Episode } from "../../types/graphql";
+import VideoPlayer from "@components/VideoPlayer";
 
 export default function Watch() {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [referer, setReferer] = useState("");
-  const [src, setSrc] = useState("");
+  const [searchParams] = useSearchParams();
+  const src = searchParams.get("src");
+  const referer = searchParams.get("referer");
 
-  const fetchSource = async (episodeId: string) => {
-    const res = await graphqlFetch({
-      query: `query Test($episodeId:ID!){
-      watch(episodeId: $episodeId) {
-         data{
-          referer
-          sources {
-            file
-          }
-        }
-      }
-    }`,
-      variables: {
-        episodeId: episodeId,
-      },
-    });
-
-    setReferer(res.watch?.data?.referer);
-    setSrc(res?.watch?.data?.sources[0]?.file);
-  };
   return (
-    <div className={styles["watch-page"]}>
-      <input type="text" ref={inputRef} />
-      <button
-        onClick={() => {
-          fetchSource(inputRef.current?.value as string);
-        }}
-      >
-        GET
-      </button>
-      <VideoPlayer referer={referer} src={src} />
+    <div className={styles["watch"]}>
+      {src && referer && <VideoPlayer referer={referer} src={src} />}
     </div>
   );
 }

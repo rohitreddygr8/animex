@@ -1,0 +1,19 @@
+.episode-btn {
+    button {
+        appearance: none;
+        border: none;
+        outline: none;
+        background-color: var(--coral-100);
+        border-radius: 0.25em;
+        color: black;
+        margin: 0.25em;
+        padding: 0.25em 0.75em;
+        font-size: 1.5em;
+        font-family: 'Satoshi';
+
+        &:hover {
+            outline: blue solid 3px;
+        }
+    }
+
+}
