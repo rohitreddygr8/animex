@@ -18,10 +18,10 @@ function SearchResults({ keyword }: { keyword: string }) {
     status
   }
 }`;
-  const getData = useCallback(async () => {
+  const getData = async () => {
     const res = await graphqlFetch({ query, variables: { keyword } });
     setResults(res.search);
-  }, [keyword]);
+  };
   useEffect(() => {
     if (debouncedValue) {
       getData();

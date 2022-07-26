@@ -13,23 +13,8 @@ export default function Navbar() {
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
-  };
-
-  const hideResults = () => {
-    setShowResults(false);
-  };
-  const viewResults = () => {
     setShowResults(true);
   };
-
-  // useEffect(() => {
-  //   searchRef.current?.addEventListener("mouseleave", hideResults);
-  //   searchRef.current?.addEventListener("focusin", viewResults);
-  //   return () => {
-  //     searchRef.current?.removeEventListener("mouseleave", hideResults);
-  //     searchRef.current?.removeEventListener("focusin", viewResults);
-  //   };
-  // });
 
   return (
     <>
@@ -49,7 +34,15 @@ export default function Navbar() {
             </button>
           </div>
           <div className={styles["results"]}>
-            <SearchResults keyword={keyword} />
+            <div
+              onClick={() => {
+                setTimeout(() => {
+                  setShowResults(false);
+                }, 100);
+              }}
+            >
+              {showResults && <SearchResults keyword={keyword} />}
+            </div>
           </div>
         </div>
       </div>

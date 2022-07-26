@@ -12,8 +12,8 @@
     --violet-100: #3c2c4f;
     --coral-100: #e73b65;
     --coral-200: #ae3956;
-
-    background-color: var(--dark-blue-500);
+    --dark: hsl(216, 37%, 8%);
+    background-color: var(--dark);
 }
 
 @font-face {

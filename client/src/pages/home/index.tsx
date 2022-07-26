@@ -10,9 +10,6 @@ export default function Home() {
     <QueryClientProvider client={queryClient}>
       <div className={styles["home-page"]}>
         <h1>Popular anime</h1>
-        <Link to="/watch">
-          <button className={styles["btn"]}>Watch</button>
-        </Link>
       </div>
     </QueryClientProvider>
   );

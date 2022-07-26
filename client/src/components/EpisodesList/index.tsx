@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import VideoPlayer from "@components/VideoPlayer";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { Watch } from "../../types/graphql";
+import { Episode, Watch } from "../../types/graphql";
 import "./styles.scss";
 import { createSearchParams, Link, useNavigate } from "react-router-dom";
 
@@ -25,7 +25,6 @@ function EpisodeButton({ episodeId, episodeNumber }: { episodeId: string; episod
 
   if (src && referer) {
     navigate(`/watch?${searchParams}`);
-    // console.log(src, referer);
   }
 
   const handleClick = async () => {
@@ -43,4 +42,24 @@ function EpisodeButton({ episodeId, episodeNumber }: { episodeId: string; episod
   );
 }
 
-export default memo(EpisodeButton);
+function EpisodesList({ episodesList }: { episodesList: Episode[] }) {
+  return (
+    <div className="episodes-list">
+      <p style={{ margin: "1em", color: "white" }}>Episodes:</p>
+      {episodesList
+        .slice(0)
+        .reverse()
+        .map((episode) => {
+          const episodeNum = Number(episode?.episodeNum);
+          return (
+            <EpisodeButton
+              episodeId={episode?.episodeId as string}
+              episodeNumber={episodeNum}
+              key={episodeNum}
+            />
+          );
+        })}
+    </div>
+  );
+}
+export default memo(EpisodesList);

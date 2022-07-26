@@ -1,14 +1,16 @@
-import EpisodeButton from "@components/EpisodeButton";
+import EpisodesList from "@components/EpisodesList";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AnimeDetails } from "../../types/graphql";
+import { AnimeDetails, Episode } from "../../types/graphql";
 import "./styles.scss";
 
 export default function AnimeDetailsPage() {
   const [searchParams] = useSearchParams();
   const animeId = searchParams.get("anime-id");
   const [data, setData] = useState<AnimeDetails | null>(null);
+  const listRef = useRef<Episode[] | null>(null);
+
   const getAnimeDetails = async (animeId: string) => {
     const query = `query getAnimeDetails($animeId:ID){
     animeDetails(animeId:$animeId) {
@@ -43,23 +45,13 @@ export default function AnimeDetailsPage() {
     }
   }, [animeId]);
 
+  if (data?.episodesList) {
+    listRef.current = data?.episodesList as Episode[];
+  }
+
   return (
     <div className="anime-details">
-      <div className="episodes-list">
-        <p style={{ margin: "1em", color: "white" }}>Episodes:</p>
-        {data?.episodesList
-          ?.slice(0)
-          .reverse()
-          .map((episode) => {
-            return (
-              <EpisodeButton
-                episodeId={episode?.episodeId as string}
-                episodeNumber={Number(episode?.episodeNum)}
-                key={Number(episode?.episodeNum)}
-              />
-            );
-          })}
-      </div>
+      {listRef.current && <EpisodesList episodesList={listRef.current} />}
     </div>
   );
 }
