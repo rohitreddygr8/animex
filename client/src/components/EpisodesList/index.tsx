@@ -1,9 +1,8 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import VideoPlayer from "@components/VideoPlayer";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { Episode, Watch } from "../../types/graphql";
 import "./styles.scss";
-import { createSearchParams, Link, useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 function EpisodeButton({ episodeId, episodeNumber }: { episodeId: string; episodeNumber: number }) {
   const [data, setData] = useState<Watch | null>(null);
@@ -21,18 +20,21 @@ function EpisodeButton({ episodeId, episodeNumber }: { episodeId: string; episod
   //@ts-ignore
   const src = data?.data?.sources[0]?.file as string;
   const referer = data?.data?.referer as string;
-  const searchParams = createSearchParams({ src: src, referer: referer });
 
   if (src && referer) {
-    navigate(`/watch?${searchParams}`);
+    navigate(`/watch`, { state: { src, referer } });
   }
 
   const handleClick = async () => {
-    const res = await graphqlFetch({
-      query,
-      variables: { episodeId },
-    });
-    setData(res.watch);
+    try {
+      const res = await graphqlFetch({
+        query,
+        variables: { episodeId },
+      });
+      setData(res.watch);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -43,22 +45,20 @@ function EpisodeButton({ episodeId, episodeNumber }: { episodeId: string; episod
 }
 
 function EpisodesList({ episodesList }: { episodesList: Episode[] }) {
+  const list = [...episodesList].reverse();
   return (
     <div className="episodes-list">
       <p style={{ margin: "1em", color: "white" }}>Episodes:</p>
-      {episodesList
-        .slice(0)
-        .reverse()
-        .map((episode) => {
-          const episodeNum = Number(episode?.episodeNum);
-          return (
-            <EpisodeButton
-              episodeId={episode?.episodeId as string}
-              episodeNumber={episodeNum}
-              key={episodeNum}
-            />
-          );
-        })}
+      {list.map((episode) => {
+        const episodeNum = Number(episode?.episodeNum);
+        return (
+          <EpisodeButton
+            episodeId={episode?.episodeId as string}
+            episodeNumber={episodeNum}
+            key={episodeNum}
+          />
+        );
+      })}
     </div>
   );
 }

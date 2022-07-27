@@ -39,4 +39,4 @@ function SearchResults({ keyword }: { keyword: string }) {
   );
 }
 
-export default SearchResults;
+export default memo(SearchResults);

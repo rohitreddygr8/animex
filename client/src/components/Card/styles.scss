@@ -1,0 +1,33 @@
+.card {
+    height: 14em;
+    aspect-ratio: 9 / 16;
+    border-radius: 0.75em;
+    overflow: hidden;
+    background-size: cover;
+    transition: 100ms;
+    display: flex;
+    align-items: flex-end;
+
+
+
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    .title {
+        font-size: 0.9em;
+        margin: 0.5em;
+        text-overflow: ellipsis;
+        color: var(--coral-100);
+
+    }
+
+    .release-date {
+        color: grey;
+        font-size: 0.7em;
+        margin: 0.2em;
+        font-weight: 500;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+}

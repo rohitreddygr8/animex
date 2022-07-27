@@ -1,13 +1,15 @@
 import EpisodesList from "@components/EpisodesList";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { AnimeDetails, Episode } from "../../types/graphql";
 import "./styles.scss";
 
 export default function AnimeDetailsPage() {
-  const [searchParams] = useSearchParams();
-  const animeId = searchParams.get("anime-id");
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  //@ts-ignore
+  const animeId = state.animeId;
   const [data, setData] = useState<AnimeDetails | null>(null);
   const listRef = useRef<Episode[] | null>(null);
 

@@ -3,14 +3,8 @@ import { Search } from "../../types/graphql";
 import styles from "./styles.module.scss";
 
 export default function TemplateResult({ anime }: { anime: Search }) {
-  const searchParams = createSearchParams({ "anime-id": anime.animeId as string });
   return (
-    <Link
-      to={{
-        pathname: "/anime-details",
-        search: `${searchParams}`,
-      }}
-    >
+    <Link to={"/anime-details"} state={{ animeId: anime.animeId }}>
       <div className={styles["result"]}>
         <img src={anime.animeImg as string} alt={anime.animeTitle as string} />
         <div>
