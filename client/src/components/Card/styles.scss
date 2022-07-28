@@ -1,6 +1,9 @@
-@media (hover:none) {
+@media (hover:hover) {
     .card {
-        outline: var(--coral-200) solid 1px;
+        &:hover {
+            transform: scale(1.05);
+            outline: var(--coral-200) solid 2px;
+        }
     }
 }
 
@@ -9,8 +12,9 @@
     aspect-ratio: 2 / 3;
     border-radius: 1em;
     overflow: hidden;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
+    outline: var(--coral-200) solid 1px;
     transition: 100ms;
     display: flex;
     align-items: flex-end;
@@ -18,10 +22,7 @@
 
 
 
-    &:hover {
-        transform: scale(1.05);
-        outline: var(--coral-200) solid 2px;
-    }
+
 
     .title {
         font-size: 0.9em;

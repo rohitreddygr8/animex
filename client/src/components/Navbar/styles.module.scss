@@ -3,13 +3,13 @@
     border: 2px solid var(--coral-100);
     height: 2.6em;
     display: flex;
-    font-family: "General Sans";
-    font-variation-settings: "wght" 500;
     margin: 0.5em;
 
 
 
     & > input {
+        font-family: "General Sans";
+        font-variation-settings: "wght" 600;
         background-color: transparent;
         padding: 0.4em;
         border: none;

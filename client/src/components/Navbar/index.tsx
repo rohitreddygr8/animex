@@ -9,13 +9,17 @@ import useDebounce from "@utils/hooks/useDebounce";
 export default function Navbar() {
   const searchRef = useRef<HTMLInputElement>(null);
   const [keyword, setKeyword] = useState("");
-  const [showResults, setShowResults] = useState(true);
-
+  const [showResults, setShowResults] = useState(false);
+  const debouncedKeyword = useDebounce<string>({ value: keyword, delay: 1000 });
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
+  };
+  const handleLeave = () => {
+    setShowResults(false);
+  };
+  const handleFocus = () => {
     setShowResults(true);
   };
-
   return (
     <>
       <div className={styles["nav-bar"]}>
@@ -28,21 +32,19 @@ export default function Navbar() {
 
         <div className={styles["search"]} ref={searchRef}>
           <div className={styles["search-bar"]}>
-            <input type="text" placeholder="Search" onInput={handleInput} value={keyword} />
+            <input
+              type="text"
+              placeholder="Search"
+              onInput={handleInput}
+              onFocus={handleFocus}
+              value={keyword}
+            />
             <button>
               <SearchIcon />
             </button>
           </div>
-          <div className={styles["results"]}>
-            <div
-              onClick={() => {
-                setTimeout(() => {
-                  setShowResults(false);
-                }, 100);
-              }}
-            >
-              {showResults && <SearchResults keyword={keyword} />}
-            </div>
+          <div className={styles["results"]} onClick={handleLeave}>
+            {showResults && debouncedKeyword && <SearchResults keyword={debouncedKeyword} />}
           </div>
         </div>
       </div>
