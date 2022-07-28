@@ -45,17 +45,20 @@ function PopularPage() {
   //   scrollRef.current?.scrollTo({ left: scrollRef.current.scrollLeft + 48 });
   // };
   return (
-    <div className="popular" ref={scrollRef} onWheel={handleWheel}>
-      {/* <button className="scroll-btn left" onClick={handleLeft}>
+    <>
+      <h3>Popular anime</h3>
+      <div className="popular" ref={scrollRef} onWheel={handleWheel}>
+        {/* <button className="scroll-btn left" onClick={handleLeft}>
         L
       </button> */}
-      {data.popular.map((obj: any, i: any) => (
-        <Card data={obj} key={i} />
-      ))}
-      {/* <button className="scroll-btn right" onClick={handleRight}>
+        {data.popular.map((obj: any, i: any) => (
+          <Card data={obj} key={i} />
+        ))}
+        {/* <button className="scroll-btn right" onClick={handleRight}>
         R
       </button> */}
-    </div>
+      </div>
+    </>
   );
 }
 

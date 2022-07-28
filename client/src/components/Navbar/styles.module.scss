@@ -54,9 +54,12 @@
 }
 
 .logo {
-    height: 4em;
+    height: 3em;
+    min-height: 2em;
     display: flex;
     overflow: hidden;
+    margin: 0.2em;
+    align-items: center;
 
     & > img {
         height: 100%;
@@ -65,9 +68,7 @@
     & > h1 {
         font-family: "Satoshi";
         font-variation-settings: "wght" 900;
-        font-size: 2.8em;
         height: 100%;
-        padding: 0.1em;
         color: white;
         letter-spacing: 2px;
     }

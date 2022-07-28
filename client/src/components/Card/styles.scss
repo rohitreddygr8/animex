@@ -1,9 +1,10 @@
 .card {
     height: 14em;
-    aspect-ratio: 9 / 16;
-    border-radius: 0.75em;
+    aspect-ratio: 2 / 3;
+    border-radius: 1em;
     overflow: hidden;
-    background-size: cover;
+    background-size: contain;
+    background-position: center;
     transition: 100ms;
     display: flex;
     align-items: flex-end;
@@ -13,11 +14,12 @@
 
     &:hover {
         transform: scale(1.05);
+        outline: var(--coral-200) solid 2px;
     }
 
     .title {
         font-size: 0.9em;
-        margin: 0.5em;
+        margin: 0.4em;
         text-overflow: ellipsis;
         color: var(--coral-100);
 
@@ -26,8 +28,9 @@
     .release-date {
         color: grey;
         font-size: 0.7em;
-        margin: 0.2em;
-        font-weight: 500;
+        margin: 0.5em;
+        margin-left: 1em;
+        font-weight: 600;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 }
