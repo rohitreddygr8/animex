@@ -6,11 +6,11 @@ import SideBar from "@components/SideBar";
 
 export default function Layout({ children }: { children: ReactElement }) {
   return (
-    <>
+    <div className={styles["layout"]}>
       <Navbar />
       <main>{children}</main>
       <SideBar />
       <Footer />
-    </>
+    </div>
   );
 }

@@ -12,7 +12,6 @@ export default function Watch() {
   const src = state.src;
   //@ts-ignore
   const referer = state.referer;
-  console.log(src, referer);
 
   return (
     <div className={styles["watch"]}>

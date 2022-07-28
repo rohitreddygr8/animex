@@ -1,5 +1,5 @@
 .popular {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    justify-items: center;
 }

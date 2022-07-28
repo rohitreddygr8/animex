@@ -1,11 +1,12 @@
 import Card from "@components/Card";
+import Loader from "@components/Loader";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { memo, useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { Popular } from "../../types/graphql";
 import "./styles.scss";
 
 function PopularPage() {
-  const [data, setData] = useState<Popular[] | null>(null);
   const query = `query getPopular {
   popular {
     animeId
@@ -16,21 +17,26 @@ function PopularPage() {
   }
 }
 `;
-  const getData = async () => {
-    try {
-      const res = await graphqlFetch({ query });
-      setData(res.popular);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  const { data, isError, isLoading } = useQuery(
+    "popular",
+    () => {
+      return graphqlFetch({
+        query,
+      });
+    },
+    { refetchOnWindowFocus: false }
+  );
+
+  if (isError) {
+    return <p>Error!!</p>;
+  }
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="popular">
-      {data?.map((obj, i) => (
+      {data.popular.map((obj: any, i: any) => (
         <Card data={obj} key={i} />
       ))}
     </div>

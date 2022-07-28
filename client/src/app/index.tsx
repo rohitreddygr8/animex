@@ -7,18 +7,20 @@ import Layout from "@components/Layout";
 import Home from "@pages/home";
 import Watch from "@pages/watch";
 import AnimeDetailsPage from "@pages/anime-details";
-import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout children={<Home />} />} />
-        <Route path="/anime-details" element={<Layout children={<AnimeDetailsPage />} />} />
-        <Route path="/watch" element={<Layout children={<Watch />} />} />
-      </Routes>
-    </BrowserRouter>
-    {/* </Provider> */}
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout children={<Home />} />} />
+          <Route path="/anime-details" element={<Layout children={<AnimeDetailsPage />} />} />
+          <Route path="/watch" element={<Layout children={<Watch />} />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
