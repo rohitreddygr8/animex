@@ -1,3 +1,9 @@
+@media (hover:none) {
+    .card {
+        outline: var(--coral-200) solid 1px;
+    }
+}
+
 .card {
     height: 14em;
     aspect-ratio: 2 / 3;
