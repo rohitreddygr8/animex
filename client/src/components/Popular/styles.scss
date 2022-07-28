@@ -1,5 +1,32 @@
 .popular {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
-    justify-items: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    scroll-behavior: smooth;
+    scroll-snap-type: x;
+    align-items: center;
+    scrollbar-width: none;
+    position: relative;
+}
+
+.scroll-btn {
+    position: absolute;
+    z-index: 10;
+    color: white;
+    background-color: rgb(35, 35, 35);
+    opacity: 0.5;
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 3em;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
 }
