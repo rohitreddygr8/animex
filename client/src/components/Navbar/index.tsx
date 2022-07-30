@@ -36,7 +36,7 @@ export default function Navbar() {
               placeholder="Search"
               onInput={handleInput}
               onFocus={handleFocus}
-              onBlur={hideResults}
+              onBlur={() => setTimeout(hideResults, 100)}
               value={keyword}
             />
             <button>
