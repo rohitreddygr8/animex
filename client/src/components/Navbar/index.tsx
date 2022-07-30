@@ -25,10 +25,7 @@ export default function Navbar() {
     <>
       <div className="nav-bar">
         <Link style={{ textDecoration: "none" }} to="/">
-          <div className="logo">
-            <Logo />
-            {/* <h1>Animex</h1> */}
-          </div>
+          <Logo />
         </Link>
 
         <div className="search" ref={searchBarRef}>
@@ -44,7 +41,7 @@ export default function Navbar() {
               <SearchIcon />
             </button>
           </div>
-          <div className="results" onClick={hideResults}>
+          <div onClick={hideResults}>
             {showResults && debouncedKeyword && <SearchResults keyword={debouncedKeyword} />}
           </div>
         </div>

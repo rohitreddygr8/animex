@@ -4,7 +4,8 @@
     height: 2.6em;
     display: flex;
     margin: 0.5em;
-
+    margin-right: 1em;
+    position: relative;
 
 
     & > input {
@@ -21,7 +22,8 @@
         transition: width 0.3s ease;
 
         &:focus-within {
-            width: 20em;
+            width: min(40vw, 20em);
+
         }
 
         &::placeholder {
@@ -51,25 +53,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo {
+    width: min(40vw, 12em);
     height: 3em;
     min-height: 2em;
+    margin: 0.75em;
     display: flex;
     overflow: hidden;
-    margin: 0.2em;
     align-items: center;
-
-    // & > img {
-    //     height: 100%;
-    // }
-
-    // & > h1 {
-    //     font-family: "Satoshi";
-    //     font-variation-settings: "wght" 900;
-    //     height: 100%;
-    //     color: white;
-    //     letter-spacing: 2px;
-    // }
+    fill: var(--coral-100);
 }

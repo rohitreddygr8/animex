@@ -1,7 +1,7 @@
 import Card from "@components/Card";
 import Loader from "@components/Loader";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useRef, WheelEvent, MouseEvent } from "react";
+import { useRef, WheelEvent, MouseEvent, useState } from "react";
 import { useQuery } from "react-query";
 import "./styles.scss";
 
@@ -17,7 +17,7 @@ export default function NewSeasonsSection() {
   }
 }`;
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
-    carouselRef.current?.scrollTo({ left: -e.deltaY * 2 + carouselRef.current.scrollLeft });
+    carouselRef.current?.scrollBy({ left: -e.deltaY * 2 });
   };
   const fetchData = () => {
     return graphqlFetch({

@@ -18,7 +18,7 @@ export default function PopularSection() {
 }
 `;
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
-    carouselRef.current?.scrollTo({ left: -e.deltaY * 2 + carouselRef.current.scrollLeft });
+    carouselRef.current?.scrollBy({ left: -e.deltaY * 2 });
   };
   const fetchData = () => {
     return graphqlFetch({

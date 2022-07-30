@@ -29,15 +29,15 @@ function SearchResults({ keyword }: { keyword: string }) {
 
   return (
     <RenderIf isTrue={keyword !== ""}>
-      <div className="search-results">
+      <div className="search-wrapper">
         {isLoading && <Loader />}
-        {data && data.search.length === 0 && (
-          <p style={{ textAlign: "center", margin: "0.5em" }}>No results found</p>
-        )}
-        {data &&
-          data.search
-            ?.slice(0, 5)
-            .map((anime: Search, i: number) => <SearchResult anime={anime} key={i} />)}
+        {data && data.search.length === 0 && <p className="no-results">No results found</p>}
+        <div className="search-results">
+          {data &&
+            data.search
+              ?.slice(0, 5)
+              .map((anime: Search, i: number) => <SearchResult anime={anime} key={i} />)}
+        </div>
       </div>
     </RenderIf>
   );

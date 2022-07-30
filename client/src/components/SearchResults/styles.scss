@@ -1,22 +1,30 @@
-.search-results {
-    position: absolute;
-    font-family: "General Sans";
-    font-variation-settings: "wght" 500;
-    border-radius: 0.5em;
-    background-color: var(--dark);
-    z-index: 30;
-    width: 20em;
+.search-wrapper {
+    position: relative;
 
-    img {
-        height: 3em;
+    .search-results {
+        font-family: "General Sans";
+        font-variation-settings: "wght" 500;
+        border-radius: 0.5em;
+        background-color: var(--dark);
+        z-index: 30;
+        width: 100%;
+        position: absolute;
+
+        p {
+            color: white;
+            margin: auto;
+            font-family: 'Satoshi';
+        }
+
+
     }
 
-    h3 {
-
-        color: yellow;
-    }
-
-    p {
+    .no-results {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        width: 100%;
         color: white;
+        font-family: 'Satoshi';
     }
 }
