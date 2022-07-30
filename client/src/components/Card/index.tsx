@@ -1,15 +1,14 @@
-import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createSearchParams, Link } from "react-router-dom";
-import { Popular } from "../../types/graphql";
+import { NewSeasons, Popular } from "../../types/graphql";
 import "./styles.scss";
 
-export default function Card({ data }: { data: Popular }) {
+export default function Card({ data }: { data: Popular | NewSeasons }) {
+  const searchParams = String(new URLSearchParams({ animeId: data.animeId as string }));
   return (
     <Link
       style={{ textDecoration: "none" }}
-      state={{ animeId: data.animeId }}
-      to={"/anime-details"}
+      to={{ pathname: "/anime-details", search: searchParams }}
     >
       <div
         className="card"
@@ -19,7 +18,7 @@ export default function Card({ data }: { data: Popular }) {
       >
         <div>
           <p className="title">{data?.animeTitle}</p>
-          <p className="release-date">{data.releaseDate}</p>
+          {/* <p className="release-date">{data?.releaseDate}</p> */}
         </div>
       </div>
     </Link>

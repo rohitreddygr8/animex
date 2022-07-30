@@ -9,10 +9,11 @@
 
 .card {
     height: 14em;
-    aspect-ratio: 2 / 3;
+    aspect-ratio: 3 / 4;
     border-radius: 1em;
     overflow: hidden;
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
     outline: var(--coral-200) solid 1px;
     transition: 100ms;
@@ -26,7 +27,7 @@
 
     .title {
         font-size: 0.9em;
-        margin: 0.4em;
+        margin: 1em 0.5em;
         text-overflow: ellipsis;
         color: var(--coral-100);
 

@@ -1,9 +1,9 @@
-import styles from "./styles.module.scss";
+import "./styles.scss";
 
 export default function Footer() {
   return (
     <>
-      <footer className={styles["footer"]}>
+      <footer className="footer">
         <p>Made by rohitman47 🐼</p>
       </footer>
     </>

@@ -1,21 +1,13 @@
-import styles from "./styles.module.scss";
-import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useQuery } from "react-query";
-import { useLocation, useSearchParams } from "react-router-dom";
-import { AnimeDetails, Episode } from "../../types/graphql";
+import "./styles.scss";
+import { useSearchParams } from "react-router-dom";
 import VideoPlayer from "@components/VideoPlayer";
 
 export default function Watch() {
-  const { state } = useLocation();
-  //@ts-ignore
-  const src = state.src;
-  //@ts-ignore
-  const referer = state.referer;
+  const [searchParams] = useSearchParams();
+  const src = searchParams.get("src");
+  const referer = searchParams.get("referer");
 
   return (
-    <div className={styles["watch"]}>
-      {src && referer && <VideoPlayer referer={referer} src={src} />}
-    </div>
+    <div className="watch">{src && referer && <VideoPlayer referer={referer} src={src} />}</div>
   );
 }

@@ -1,15 +1,13 @@
 import EpisodesList from "@components/EpisodesList";
 import Loader from "@components/Loader";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { AnimeDetails, Episode } from "../../types/graphql";
+import { useSearchParams } from "react-router-dom";
 import "./styles.scss";
 
-export default function AnimeDetailsPage() {
-  const { state } = useLocation();
-  const navigate = useNavigate();
+export default function AnimeDetails() {
+  const [searchParams] = useSearchParams();
+  const animeId = searchParams.get("animeId");
   const query = `query getAnimeDetails($animeId:ID){
     animeDetails(animeId:$animeId) {
       animeId
@@ -28,10 +26,8 @@ export default function AnimeDetailsPage() {
       otherNames
   }
 }`;
-  //@ts-ignore
-  const animeId = state.animeId;
 
-  const { data, isError, isLoading } = useQuery("getDetails " + animeId, () => {
+  const { data, isLoading, isError, error } = useQuery("getDetails " + animeId, () => {
     return graphqlFetch({
       query,
       variables: { animeId },
@@ -39,16 +35,14 @@ export default function AnimeDetailsPage() {
   });
 
   if (isError) {
-    return <p>Error!!</p>;
-  }
-  if (isLoading) {
-    return <Loader />;
+    console.log(error);
+    return <p style={{ backgroundColor: "red", color: "white" }}>Error</p>;
   }
 
   return (
     <div className="anime-details">
-      {" "}
-      <EpisodesList episodesList={data.animeDetails.episodesList} />{" "}
+      {isLoading && <Loader />}
+      {data && <EpisodesList episodesList={data.animeDetails.episodesList} />}
     </div>
   );
 }

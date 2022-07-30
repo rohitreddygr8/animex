@@ -1,10 +1,12 @@
-import styles from "./styles.module.scss";
-import PopularPage from "@components/Popular";
+import "./styles.scss";
+import PopularSection from "@components/PopularSection";
+import NewSeasonsSection from "@components/NewSeasonsSection";
 
 export default function Home() {
   return (
-    <div className={styles["home-page"]}>
-      <PopularPage />
+    <div className="home">
+      <PopularSection />
+      <NewSeasonsSection />
     </div>
   );
 }

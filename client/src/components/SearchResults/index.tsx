@@ -1,10 +1,9 @@
-import styles from "./styles.module.scss";
+import "./styles.scss";
 import RenderIf from "@components/RenderIf";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo } from "react";
 import { Search } from "../../types/graphql";
-import useDebounce from "@utils/hooks/useDebounce";
-import TemplateResult from "@components/TemplateResult";
+import SearchResult from "@components/SearchResult";
 import { useQuery } from "react-query";
 import Loader from "@components/Loader";
 
@@ -19,15 +18,18 @@ function SearchResults({ keyword }: { keyword: string }) {
   }
 }`;
 
-  const fetchData = useMemo(() => {
-    return graphqlFetch({ query, variables: { keyword } });
-  }, [keyword]);
+  const { data, isLoading, isError, error } = useQuery("getSearchResults " + keyword, () =>
+    graphqlFetch({ query, variables: { keyword } })
+  );
 
-  const { data, isLoading } = useQuery("getSearchResults " + keyword, () => fetchData);
+  if (isError) {
+    console.log(error);
+    return <p style={{ backgroundColor: "red", color: "white" }}>Error</p>;
+  }
 
   return (
     <RenderIf isTrue={keyword !== ""}>
-      <div className={styles["search-results"]}>
+      <div className="search-results">
         {isLoading && <Loader />}
         {data && data.search.length === 0 && (
           <p style={{ textAlign: "center", margin: "0.5em" }}>No results found</p>
@@ -35,7 +37,7 @@ function SearchResults({ keyword }: { keyword: string }) {
         {data &&
           data.search
             ?.slice(0, 5)
-            .map((anime: Search, i: number) => <TemplateResult anime={anime} key={i} />)}
+            .map((anime: Search, i: number) => <SearchResult anime={anime} key={i} />)}
       </div>
     </RenderIf>
   );
