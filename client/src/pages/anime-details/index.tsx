@@ -1,6 +1,7 @@
 import EpisodesList from "@components/EpisodesList";
 import Loader from "@components/Loader";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
+import { useMemo } from "react";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import "./styles.scss";
@@ -27,12 +28,16 @@ export default function AnimeDetails() {
   }
 }`;
 
-  const { data, isLoading, isError, error } = useQuery("getDetails " + animeId, () => {
-    return graphqlFetch({
-      query,
-      variables: { animeId },
-    });
-  });
+  const { data, isLoading, isError, error } = useQuery(
+    "getDetails " + animeId,
+    () =>
+      graphqlFetch({
+        query,
+        variables: { animeId },
+      }),
+    { refetchOnMount: false, refetchOnWindowFocus: false }
+  );
+  const episodesList = useMemo(() => data?.animeDetails?.episodesList, [data]);
 
   if (isError) {
     console.log(error);
@@ -42,7 +47,7 @@ export default function AnimeDetails() {
   return (
     <div className="anime-details">
       {isLoading && <Loader />}
-      {data && <EpisodesList episodesList={data.animeDetails.episodesList} />}
+      {episodesList && <EpisodesList episodesList={episodesList} />}
     </div>
   );
 }

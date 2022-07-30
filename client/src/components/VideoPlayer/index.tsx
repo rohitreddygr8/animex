@@ -1,6 +1,6 @@
 import "./styles.scss";
-import { memo, useEffect, useRef, useState } from "react";
-import { Hls, Player, Video } from "@vime/react";
+import { memo } from "react";
+import { Hls, Player } from "@vime/react";
 
 function VideoPlayer({ referer, src }: { referer: string; src: string }) {
   return (
