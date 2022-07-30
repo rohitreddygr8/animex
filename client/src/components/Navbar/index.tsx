@@ -1,6 +1,6 @@
 import "./styles.scss";
 import SearchIcon from "@assets/icons/search.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchResults from "@components/SearchResults";
 import testImgSrc from "@assets/images/maneki-neko.png";
 import Logo from "@assets/icons/logo.svg";
@@ -21,6 +21,7 @@ export default function Navbar() {
   const handleFocus = () => {
     setShowResults(true);
   };
+
   return (
     <>
       <div className="nav-bar">
@@ -35,6 +36,7 @@ export default function Navbar() {
               placeholder="Search"
               onInput={handleInput}
               onFocus={handleFocus}
+              onBlur={hideResults}
               value={keyword}
             />
             <button>
