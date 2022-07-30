@@ -29,6 +29,7 @@ h3 {
     padding: 0.5em;
     cursor: pointer;
     position: absolute;
+
 }
 
 .left {
@@ -37,4 +38,10 @@ h3 {
 
 .right {
     right: 0;
+}
+
+@media (hover:none) {
+    .scroll-btn {
+        display: none;
+    }
 }
