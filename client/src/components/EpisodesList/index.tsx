@@ -6,34 +6,10 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 
 function EpisodeButton({ episodeId, episodeNumber }: { episodeId: string; episodeNumber: number }) {
   const navigate = useNavigate();
-  const query = `query getSource($episodeId:ID!){
-  watch(episodeId:$episodeId){
-    data{
-      referer
-      sources{
-        file
-      }
-    }
-  }
-}`;
+  const searchParams = String(createSearchParams({ episodeId }));
 
   const handleClick = async () => {
-    try {
-      const res = await graphqlFetch({
-        query,
-        variables: { episodeId },
-      });
-      const src = res.watch?.data?.sources[0]?.file as string;
-      const referer = res.watch?.data?.referer as string;
-      if (src && referer) {
-        console.log(src);
-
-        const searchParams = String(createSearchParams({ src, referer }));
-        navigate({ pathname: "/watch", search: searchParams });
-      }
-    } catch (e) {
-      console.log(e);
-    }
+    navigate({ pathname: "/watch", search: searchParams });
   };
 
   return (

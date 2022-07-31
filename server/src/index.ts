@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-app.get("/proxy", proxyHandler);
+app.use("/proxy", proxyHandler);
 
 app.get("*", (req, res) => {
   res.redirect("/");
