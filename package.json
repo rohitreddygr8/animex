@@ -8,7 +8,7 @@
     "serve": "concurrently \"npm run dev\" \"cd ./server && tsc --watch \" \"cd ./server/dist && cross-env NODE_ENV=development nodemon index.js\"",
     "dev": "cd ./client && vite",
     "preview": "cd ./client && vite preview",
-    "build": "cd ./client && tsc && vite build && cd ../server && rimraf ./dist && tsc",
+    "build": "cd ./client && tsc && vite build && cd ../server && tsc",
     "start": "cd ./server/dist && cross-env NODE_ENV=production node index.js",
     "codegen": "graphql-codegen --config codegen.yml",
     "lint": "eslint ./"

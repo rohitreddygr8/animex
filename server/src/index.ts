@@ -6,7 +6,7 @@ import helmet from "helmet";
 import schema from "./graphql/schema.js";
 import proxyHandler from "./controllers/proxy.controller.js";
 
-config({ path: "../config/.env" });
+// config({ path: "../config/.env" });
 const { NODE_ENV } = process.env;
 const PORT = Number(process.env.PORT || 7000);
 const HOST = NODE_ENV === "production" ? "0.0.0.0" : "localhost";
