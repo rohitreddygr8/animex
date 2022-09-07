@@ -8,7 +8,7 @@ import proxyHandler from "./controllers/proxy.controller.js";
 
 config({ path: "../config/.env" });
 const { NODE_ENV } = process.env;
-const PORT = NODE_ENV === "production" ? Number(process.env.PORT) : 7000;
+const PORT = Number(process.env.PORT || 7000);
 const HOST = NODE_ENV === "production" ? "0.0.0.0" : "localhost";
 const app = express();
 
