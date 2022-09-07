@@ -34,7 +34,7 @@ app.get("*", (req, res) => {
   res.redirect("/");
 });
 
-app.listen(7000, HOST ?? "127.0.0.1", () => {
+app.listen(PORT, HOST, () => {
   console.log(
     `✨ Server is running on \u001b[35;1mhttp://${HOST}:${PORT}\u001b[0m in \u001b[37;1m${NODE_ENV}\u001b[0m environment ✨`
   );
