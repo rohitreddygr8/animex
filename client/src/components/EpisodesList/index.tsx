@@ -1,25 +1,18 @@
-import { memo, useCallback, useEffect, useState } from "react";
-import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { Episode, Watch } from "../../types/graphql";
 import "./styles.scss";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { memo } from "react";
+import { Link } from "react-router-dom";
 
 function EpisodeButton({ episodeId, episodeNumber }: { episodeId: string; episodeNumber: number }) {
-  const navigate = useNavigate();
-  const searchParams = String(createSearchParams({ episodeId }));
-
-  const handleClick = async () => {
-    navigate({ pathname: "/watch", search: searchParams });
-  };
-
   return (
-    <div className="episode-btn">
-      <button onClick={handleClick}>{episodeNumber}</button>
-    </div>
+    <Link style={{ textDecoration: "none" }} to={`/watch/${episodeId}`}>
+      <div className="episode-btn">
+        <button>{episodeNumber}</button>
+      </div>
+    </Link>
   );
 }
 
-function EpisodesList({ episodesList }: { episodesList: Episode[] }) {
+function EpisodesList({ episodesList }: { episodesList: any }) {
   const list = [...episodesList].reverse();
   return (
     <div className="episodes-list">

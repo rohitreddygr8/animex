@@ -2,8 +2,10 @@ import Card from "@components/Card";
 import Loader from "@components/Loader";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { memo, MouseEvent, useEffect, useRef, useState, WheelEvent } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import "./styles.scss";
+import ForwardIcon from "@assets/icons/chevron-forward-outline.svg";
+import BackIcon from "@assets/icons/chevron-back-outline.svg";
 
 export default function PopularSection() {
   const carouselRef = useRef<HTMLDivElement | null>(null);
@@ -25,7 +27,7 @@ export default function PopularSection() {
       query,
     });
   };
-  const { data, isLoading, isError, error } = useQuery("popular", fetchData, {
+  const { data, isLoading, isError, error } = useQuery(["popular"], fetchData, {
     refetchOnWindowFocus: false,
   });
 
@@ -55,7 +57,7 @@ export default function PopularSection() {
       <h3>Popular anime</h3>
       <div className="popular-wrapper">
         <button onClick={scrollLeft} className="left scroll-btn">
-          &lt;
+          <BackIcon />
         </button>
         <div className="carousel" ref={carouselRef} onWheel={handleWheel}>
           {data.popular.map((anime: any, i: any) => (
@@ -63,7 +65,7 @@ export default function PopularSection() {
           ))}
         </div>
         <button onClick={scrollRight} className="right scroll-btn">
-          &gt;
+          <ForwardIcon />
         </button>
       </div>
     </section>

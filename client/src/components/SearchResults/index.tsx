@@ -2,9 +2,8 @@ import "./styles.scss";
 import RenderIf from "@components/RenderIf";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { memo } from "react";
-import { Search } from "../../types/graphql";
 import SearchResult from "@components/SearchResult";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import Loader from "@components/Loader";
 
 function SearchResults({ keyword }: { keyword: string }) {
@@ -18,9 +17,15 @@ function SearchResults({ keyword }: { keyword: string }) {
   }
 }`;
 
-  const { data, isLoading, isError, error } = useQuery("getSearchResults " + keyword, () =>
+  const {
+    data: res,
+    isLoading,
+    isError,
+    error,
+  } = useQuery(["getSearchResults " + keyword], () =>
     graphqlFetch({ query, variables: { keyword } })
   );
+  const data: IGetSearchResults = res;
 
   if (isError) {
     console.log(error);
@@ -36,7 +41,7 @@ function SearchResults({ keyword }: { keyword: string }) {
           {data &&
             data.search
               ?.slice(0, 5)
-              .map((anime: Search, i: number) => <SearchResult anime={anime} key={i} />)}
+              .map((anime: any, i: number) => <SearchResult anime={anime} key={i} />)}
         </div>
       </div>
     </RenderIf>

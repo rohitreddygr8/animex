@@ -57,12 +57,45 @@
 }
 
 .logo {
+
+
     width: min(40vw, 12em);
-    height: 3em;
+    // height: 3em;
     min-height: 2em;
     margin: 0.75em;
     display: flex;
     overflow: hidden;
     align-items: center;
-    fill: var(--coral-100);
+    color: white;
+    font-family: "Satoshi";
+    font-size: 1.5em;
+
+    img:hover {
+        animation: logo-shake 0.5s ease-in infinite forwards;
+    }
+
+
+}
+
+@keyframes logo-shake {
+    0% {
+        transform: rotate(5deg) scale(1.07);
+    }
+
+    25% {
+        transform: rotate(-5deg) scale(1.07);
+    }
+
+    50% {
+        transform: rotate(5deg) scale(1.07);
+    }
+
+    75% {
+        transform: rotate(-5deg) scale(1.07);
+    }
+
+    100% {
+        transform: rotate(5deg) scale(1.07);
+    }
+
 }

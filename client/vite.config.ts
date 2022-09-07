@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { resolve } from "path";
+import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import postcssPresetEnv from "postcss-preset-env";
@@ -18,7 +18,6 @@ export default defineConfig({
       "@context": resolve(__dirname, "./src/app/context.ts"),
       "@components": resolve(__dirname, "./src/components"),
       "@pages": resolve(__dirname, "./src/pages"),
-      "@store": resolve(__dirname, "./src/app/store.ts"),
       "@utils": resolve(__dirname, "./src/utils"),
     },
   },

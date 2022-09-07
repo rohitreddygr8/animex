@@ -2,8 +2,10 @@ import Card from "@components/Card";
 import Loader from "@components/Loader";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { useRef, WheelEvent, MouseEvent, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import "./styles.scss";
+import ForwardIcon from "@assets/icons/chevron-forward-outline.svg";
+import BackIcon from "@assets/icons/chevron-back-outline.svg";
 
 export default function NewSeasonsSection() {
   const carouselRef = useRef<HTMLDivElement | null>(null);
@@ -24,7 +26,7 @@ export default function NewSeasonsSection() {
       query,
     });
   };
-  const { data, isLoading, isError, error } = useQuery("newSeasons", fetchData, {
+  const { data, isLoading, isError, error } = useQuery(["newSeasons"], fetchData, {
     refetchOnWindowFocus: false,
   });
 
@@ -52,9 +54,10 @@ export default function NewSeasonsSection() {
   return (
     <section className="new-seasons" aria-label="New seasons">
       <h3>New seasons</h3>
+      <ForwardIcon />
       <div className="popular-wrapper">
         <button onClick={scrollLeft} className="left scroll-btn">
-          &lt;
+          <BackIcon />
         </button>
         <div className="carousel" ref={carouselRef} onWheel={handleWheel}>
           {data.newSeasons.map((anime: any, i: any) => (
@@ -62,7 +65,7 @@ export default function NewSeasonsSection() {
           ))}
         </div>
         <button onClick={scrollRight} className="right scroll-btn">
-          &gt;
+          <ForwardIcon />
         </button>
       </div>
     </section>

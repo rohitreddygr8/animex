@@ -1,14 +1,9 @@
-import { createSearchParams, Link } from "react-router-dom";
-import { Search } from "../../types/graphql";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 
-export default function TemplateResult({ anime }: { anime: Search }) {
-  const searchParams = String(createSearchParams({ animeId: anime.animeId as string }));
+export default function TemplateResult({ anime }: { anime: any }) {
   return (
-    <Link
-      style={{ textDecoration: "none" }}
-      to={{ pathname: "/anime-details", search: searchParams }}
-    >
+    <Link style={{ textDecoration: "none" }} to={{ pathname: `/anime-details/${anime.animeId}` }}>
       <div className={styles["result"]}>
         <img src={anime.animeImg as string} alt={anime.animeTitle as string} />
         <div>

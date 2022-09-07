@@ -1,7 +1,6 @@
 import "./styles.scss";
 import { memo, useEffect, useRef } from "react";
 import { Hls, LoadingScreen, MenuItem, Player, Scrim, Settings, Spinner, Ui } from "@vime/react";
-import Logo from "@assets/icons/logo.svg";
 import useLocalStorage from "@utils/hooks/useLocalStorage";
 
 function VideoPlayer({ src }: { src: string }) {

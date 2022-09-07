@@ -1,11 +1,19 @@
 .carousel {
     overflow-x: scroll;
+    overflow-y: hidden;
     display: flex;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     align-items: center;
     scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+
 }
+
 
 h3 {
     margin: 0.5em;
@@ -15,6 +23,8 @@ h3 {
     position: relative;
     height: 15em;
     display: flex;
+
+
 }
 
 .scroll-btn {
@@ -29,6 +39,10 @@ h3 {
     padding: 0.5em;
     cursor: pointer;
     position: absolute;
+
+    svg {
+        height: 2em;
+    }
 
 }
 

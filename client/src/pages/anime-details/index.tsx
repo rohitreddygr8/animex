@@ -2,13 +2,12 @@ import EpisodesList from "@components/EpisodesList";
 import Loader from "@components/Loader";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
 import { useMemo } from "react";
-import { useQuery } from "react-query";
-import { useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useParams, useSearchParams } from "react-router-dom";
 import "./styles.scss";
 
 export default function AnimeDetails() {
-  const [searchParams] = useSearchParams();
-  const animeId = searchParams.get("animeId");
+  const { animeId } = useParams();
   const query = `query getAnimeDetails($animeId:ID){
     animeDetails(animeId:$animeId) {
       animeId
@@ -29,7 +28,7 @@ export default function AnimeDetails() {
 }`;
 
   const { data, isLoading, isError, error } = useQuery(
-    "getDetails " + animeId,
+    ["getDetails " + animeId],
     () =>
       graphqlFetch({
         query,

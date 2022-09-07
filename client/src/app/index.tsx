@@ -1,12 +1,11 @@
 import "./global.scss";
-import store from "./store";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "@pages/home";
 import Watch from "@pages/watch";
 import AnimeDetailsPage from "@pages/anime-details";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import SideBar from "@components/SideBar";
@@ -19,9 +18,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="*" element={<Navigate to={"/"} replace />} />
           <Route path="/" element={<Home />} />
-          <Route path="/anime-details" element={<AnimeDetailsPage />} />
-          <Route path="/watch" element={<Watch />} />
+          <Route path="/anime-details/:animeId" element={<AnimeDetailsPage />} />
+          <Route path="/watch/:episodeId" element={<Watch />} />
         </Routes>
         <SideBar />
         <Footer />

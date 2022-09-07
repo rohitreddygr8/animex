@@ -1,19 +1,13 @@
-import { useEffect, useRef } from "react";
-import { createSearchParams, Link } from "react-router-dom";
-import { NewSeasons, Popular } from "../../types/graphql";
 import "./styles.scss";
+import { Link } from "react-router-dom";
 
-export default function Card({ data }: { data: Popular | NewSeasons }) {
-  const searchParams = String(new URLSearchParams({ animeId: data.animeId as string }));
+export default function Card({ data }: { data: any }) {
   return (
-    <Link
-      style={{ textDecoration: "none" }}
-      to={{ pathname: "/anime-details", search: searchParams }}
-    >
+    <Link style={{ textDecoration: "none" }} to={{ pathname: `/anime-details/${data.animeId}` }}>
       <div
         className="card"
         style={{
-          backgroundImage: `linear-gradient(-1turn, hsl(0, 0%, 5%), transparent), url(${data.animeImg})`,
+          backgroundImage: `linear-gradient(-1turn, hsl(0, 0%, 5%) 20%, transparent 80% ) , url(${data.animeImg})`,
         }}
       >
         <div>

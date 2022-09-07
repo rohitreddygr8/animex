@@ -40,9 +40,6 @@
       "@pages/*": [
         "./src/pages/*"
       ],
-      "@store": [
-        "./src/app/store.ts"
-      ],
       "@utils/*": [
         "./src/utils/*"
       ],

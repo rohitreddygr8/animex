@@ -1,13 +1,23 @@
 import "./styles.scss";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import VideoPlayer from "@components/VideoPlayer";
 import graphqlFetch from "@utils/helpers/graphqlFetch";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import Loader from "@components/Loader";
 
+interface IGetSource {
+  watch: {
+    data: {
+      referer: string;
+      sources: {
+        file: string;
+      }[];
+    };
+  };
+}
+
 export default function Watch() {
-  const [searchParams] = useSearchParams();
-  const episodeId = searchParams.get("episodeId");
+  const { episodeId } = useParams();
   const query = `query getSource($episodeId:ID!){
   watch(episodeId:$episodeId){
     data{
@@ -18,8 +28,9 @@ export default function Watch() {
     }
   }
 }`;
+
   const { data, isLoading, isError, error } = useQuery(
-    "getSearchResults " + episodeId,
+    ["getSearchResults " + episodeId],
     () =>
       graphqlFetch({
         query,

@@ -2,7 +2,6 @@ import "./styles.scss";
 import SearchIcon from "@assets/icons/search.svg";
 import { useEffect, useRef, useState } from "react";
 import SearchResults from "@components/SearchResults";
-import testImgSrc from "@assets/images/maneki-neko.png";
 import Logo from "@assets/icons/logo.svg";
 import { Link } from "react-router-dom";
 import useDebounce from "@utils/hooks/useDebounce";
@@ -26,13 +25,16 @@ export default function Navbar() {
     <>
       <div className="nav-bar">
         <Link style={{ textDecoration: "none" }} to="/">
-          <Logo />
+          <div className="logo">
+            <img src="./favicon.ico" alt="" height={"75px"} />
+            <p>Anime Monkey</p>
+          </div>
         </Link>
 
         <div className="search" ref={searchBarRef}>
           <div className="search-bar">
             <input
-              type="text"
+              type="search"
               placeholder="Search"
               onInput={handleInput}
               onFocus={handleFocus}
