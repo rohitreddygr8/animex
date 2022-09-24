@@ -15,19 +15,19 @@ const HOST = "0.0.0.0";
 const app = express();
 const { Pool } = pg;
 
-const pool = new Pool({
-  connectionString: DB_URL,
-  ssl: { rejectUnauthorized: false },
-});
+// const pool = new Pool({
+//   connectionString: DB_URL,
+//   ssl: { rejectUnauthorized: false },
+// });
 
-pool
-  .connect()
-  .then(() => {
-    console.log("connected to db!!!");
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+// pool
+//   .connect()
+//   .then(() => {
+//     console.log("connected to db!!!");
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
 
 app.use(
   // helmet({ contentSecurityPolicy: NODE_ENV === "development" ? false : undefined }),
