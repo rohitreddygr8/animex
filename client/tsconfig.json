@@ -3,7 +3,8 @@
     "lib": [
       "DOM",
       "DOM.Iterable",
-      "ESNext"
+      "ESNext",
+      "WebWorker"
     ],
     "noEmit": true,
     "strict": true,
@@ -28,20 +29,17 @@
       "@assets/*": [
         "./src/assets/*"
       ],
-      "@constants": [
-        "./src/app/constants.ts"
+      "@components": [
+        "./src/components"
       ],
-      "@context": [
-        "./src/app/context.ts"
+      "@pages": [
+        "./src/pages"
       ],
-      "@components/*": [
-        "./src/components/*"
+      "@hooks": [
+        "./src/hooks"
       ],
-      "@pages/*": [
-        "./src/pages/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
+      "@utils": [
+        "./src/utils"
       ],
     }
   },

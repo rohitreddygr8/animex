@@ -1,0 +1,100 @@
+@media (hover) {
+    .card:hover {
+        height: 16em;
+        width: 24em;
+
+        .title {
+            white-space: unset;
+            animation: showlines 0.4s 1 forwards;
+        }
+
+        .release-date {
+            animation: showlines 0.4s 1 forwards;
+
+        }
+    }
+}
+
+@keyframes showlines {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.card-data {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(-1turn, hsl(0, 0%, 5%) 15%, transparent 85%) center / cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.5em;
+    padding: 0.5em;
+
+    .title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 0.9em;
+        color: var(--coral-100);
+
+    }
+
+    .release-date {
+        color: grey;
+        font-size: 0.75em;
+        margin-left: 1em;
+        font-weight: 600;
+    }
+
+
+}
+
+
+.card {
+    height: 15em;
+    width: 10em;
+    border-radius: 1em;
+    overflow: hidden;
+    border: 2px solid var(--dark);
+    // background-color: var(--dark-blue-500);
+    transition: all 200ms;
+    display: flex;
+    align-items: flex-end;
+    scroll-snap-align: start;
+    position: relative;
+
+    img {
+        position: absolute;
+        z-index: -100;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+}
+
+.heart {
+    height: 2em;
+    width: 2em;
+    margin: 0.75em;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: all 0.2s;
+
+    .card-data:hover > & {
+        opacity: 1;
+    }
+
+    svg {
+        stroke: var(--coral-100);
+        fill: var(--coral-100);
+    }
+}

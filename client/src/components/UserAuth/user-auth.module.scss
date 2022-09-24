@@ -1,0 +1,33 @@
+.user-auth {
+    background-color: var(--dark);
+    height: 20em;
+    width: max(20em, 40vw);
+    border-radius: 1em;
+    display: grid;
+    place-items: center;
+
+
+    input {
+        all: unset;
+        font-variation-settings: 'wght' 500;
+        color: var(--coral-100);
+        background-color: transparent;
+        height: 2em;
+        width: 12em;
+    }
+
+    .username,
+    .password {
+        display: flex;
+        align-items: center;
+        border-radius: 0.5em;
+        border: 2px solid var(--coral-100);
+        padding: 0.5em 1em;
+
+        button {
+            height: 1.5em;
+            width: 1.5em;
+        }
+    }
+
+}

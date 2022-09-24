@@ -1,4 +1,24 @@
 /// <reference types="vite/client" />
+
+interface CardData {
+  animeId: string;
+  animeTitle: string;
+  animeImg: string;
+  releaseDate: string;
+}
+
+interface SearchResultData {
+  animeId: string;
+  animeTitle: string;
+  animeImg: string;
+  status: string;
+}
+
+interface EpisodeData {
+  episodeNum: number;
+  episodeId: string;
+}
+
 interface IGetSource {
   watch: {
     data: {
@@ -18,4 +38,12 @@ interface IGetSearchResults {
     animeImg: string;
     status: string;
   }[];
+}
+
+interface TopAiring {
+  animeId: string;
+  animeTitle: string;
+  animeImg: string;
+  animeUrl: string;
+  latestEp: string;
 }

@@ -1,0 +1,39 @@
+.video-player {
+    width: 800px;
+    height: 500px;
+}
+
+.play-btn {
+    --size: 4em;
+    position: absolute;
+    top: calc(50% - var(--size) / 2);
+    left: calc(50% - var(--size) / 2);
+    border-radius: 50%;
+    background-color: transparent;
+    height: var(--size);
+    width: var(--size);
+    border: none;
+
+}
+
+.loader {
+    position: absolute;
+    top: calc(50% - 2em);
+    left: calc(50% - 2em);
+    height: 4em;
+    background-color: transparent;
+
+    svg {
+        color: var(--coral-100) !important;
+    }
+
+    &.hide {
+        display: none;
+    }
+}
+
+.video-container {
+    position: relative;
+    display: grid;
+    place-items: center;
+}

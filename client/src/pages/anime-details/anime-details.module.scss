@@ -1,0 +1,53 @@
+.episodes-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.anime-details {
+    height: 100%;
+    width: 100%;
+}
+
+.anime-details-wrapper {
+    display: flex;
+    gap: 2em;
+    margin: 2em;
+}
+
+.anime-info {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    h2 {
+        margin: 1em 0;
+    }
+
+    h4 {
+        color: grey;
+        border: 1px solid grey;
+        padding: 0.5em;
+        border-radius: 0.25em;
+        margin: 0.5em;
+        width: fit-content;
+    }
+
+    span {
+        color: grey;
+        border: 1px solid grey;
+        padding: 0.5em;
+        border-radius: 0.25em;
+        width: fit-content;
+        margin: 0.5em;
+        display: inline;
+    }
+
+    p {
+        color: grey;
+    }
+}
+
+.anime-img {
+    height: 15em;
+    width: 10em;
+}

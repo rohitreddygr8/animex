@@ -3,14 +3,31 @@ import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import pg from "pg";
 import schema from "./graphql/schema.js";
 import proxyHandler from "./controllers/proxy.controller.js";
+import { authHandler } from "./controllers/auth.controller.js";
+config({ path: "../config/.env" });
 
-// config({ path: "../config/.env" });
-const { NODE_ENV } = process.env;
+const { NODE_ENV, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_URL } = process.env;
 const PORT = Number(process.env.PORT || 7000);
-const HOST = NODE_ENV === "production" ? "0.0.0.0" : "localhost";
+const HOST = "0.0.0.0";
 const app = express();
+const { Pool } = pg;
+
+const pool = new Pool({
+  connectionString: DB_URL,
+  ssl: { rejectUnauthorized: false },
+});
+
+pool
+  .connect()
+  .then(() => {
+    console.log("connected to db!!!");
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 app.use(
   // helmet({ contentSecurityPolicy: NODE_ENV === "development" ? false : undefined }),
@@ -20,15 +37,19 @@ app.use(
   express.static("../../client/dist/")
 );
 
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    graphiql: process.env.NODE_ENV === "development" ? { headerEditorEnabled: true } : false,
-  })
-);
-
-app.use("/proxy", proxyHandler);
+if (process.env.NODE_ENV === "development") {
+  app.get(
+    "/api/graphql",
+    graphqlHTTP({
+      schema,
+      pretty: true,
+      graphiql: { headerEditorEnabled: true },
+    })
+  );
+}
+app.get("/api/proxy", proxyHandler);
+app.post("/api/auth", authHandler);
+app.post("/api/graphql", graphqlHTTP({ schema }));
 
 app.get("*", (req, res) => {
   res.redirect("/");

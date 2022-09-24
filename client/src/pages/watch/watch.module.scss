@@ -1,0 +1,25 @@
+.video-wrapper {
+    display: grid;
+    place-items: center;
+    width: 700px;
+    aspect-ratio: 16 / 9;
+    position: relative;
+}
+
+.video-player {
+    width: 800px;
+    height: 500px;
+}
+
+.play-btn {
+    --size: 4em;
+    position: absolute;
+    top: calc(50% - var(--size) / 2);
+    left: calc(50% - var(--size) / 2);
+    border-radius: 50%;
+    background-color: transparent;
+    height: var(--size);
+    width: var(--size);
+    border: none;
+
+}

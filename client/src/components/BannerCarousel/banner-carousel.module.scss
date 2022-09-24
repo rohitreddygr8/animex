@@ -1,0 +1,114 @@
+.banner-carousel {
+    height: 70vh;
+    width: 100%;
+    position: relative;
+
+    .gallery {
+        z-index: -1000;
+        height: 100%;
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        pointer-events: none;
+    }
+
+    .banner {
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        position: relative;
+
+        .bg {
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 40%;
+            object-fit: cover;
+            opacity: 0.5;
+            z-index: -1000;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+
+        }
+
+        .details {
+            height: 100%;
+            width: max-content;
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            p {
+                color: white;
+                font-size: 2em;
+            }
+
+            .more-info-btn {
+                display: flex;
+                align-items: center;
+                background-color: var(--coral-100);
+                padding: 0.25em 0.75em;
+                border-radius: 0.5em;
+                color: var(--dark);
+                height: 3em;
+                font-variation-settings: 'wght' 600;
+                gap: 0.5em;
+
+                svg {
+                    width: 2em;
+                    fill: var(--dark);
+                }
+            }
+        }
+    }
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1em;
+    margin: 1em;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+
+    div {
+        height: 0.75em;
+        width: 0.75em;
+        border-radius: 50%;
+    }
+}
+
+.scroll-btn {
+    z-index: 10;
+    color: white;
+    background-color: transparent;
+    opacity: 0.8;
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 3em;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+
+    svg {
+        height: 2em;
+    }
+
+    &:first-of-type {
+        left: 0;
+    }
+
+    &:last-of-type {
+        right: 0;
+    }
+
+}

@@ -1,0 +1,37 @@
+.home {
+    color: white;
+    font-variation-settings: "wght" 800;
+    height: 100%;
+    width: 100%;
+
+}
+
+.loader-wrapper {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+
+    svg {
+        height: 5em;
+    }
+}
+
+.section {
+    & > p {
+        font-size: 1.5em;
+        margin: 1em 0.5em;
+    }
+}
+
+.btn {
+    font-variation-settings: "wght" 300;
+    color: white;
+    background-color: dodgerblue;
+    border: none;
+    outline: none;
+    padding: 0.5em 1em;
+    margin: 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
