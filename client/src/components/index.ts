@@ -5,7 +5,7 @@ export * from "./EpisodesList/episodes-list";
 export * from "./Layout/layout";
 export * from "./Loader/loader";
 export * from "./Navbar/navbar";
-export * from "./SearchResults/search-results";
 export * from "./SideBar/side-bar";
 export * from "./UserAuth/user-auth";
 export * from "./VideoPlayer/video-player";
+export * from "./Search/search";

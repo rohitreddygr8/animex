@@ -26,7 +26,13 @@ export const Carousel = memo(({ data }: { data: any }) => {
       <section className={styles.cardList} ref={cardListRef}>
         {data
           ? data.map((anime: any, i: any) => <Card cardData={anime} key={i} />)
-          : new Array(20).map((anime: any, i: any) => <Card cardData={null} key={i} />)}
+          : new Array(20)
+              .map(() => {
+                console.log("p");
+
+                return 1;
+              })
+              .map((anime: any, i: any) => <Card cardData={null} key={i} />)}
       </section>
       <button onClick={scrollRight} className={styles.scrollBtn}>
         <ForwardIcon />

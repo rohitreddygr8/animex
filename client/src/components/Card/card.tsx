@@ -3,7 +3,6 @@ import styles from "./card.module.scss";
 import HeartedIcon from "@assets/icons/heart.svg";
 import NotHeartedIcon from "@assets/icons/not-hearted.svg";
 import { useState } from "react";
-import e from "cors";
 
 export const Card = ({ cardData }: { cardData: CardData | null }) => {
   const [isHearted, setIsHearted] = useState(false);
@@ -20,17 +19,15 @@ export const Card = ({ cardData }: { cardData: CardData | null }) => {
   return (
     <Link to={`/anime-details/${animeId}`}>
       <div className={styles.card}>
-        <div className={styles.cardData}>
-          <button
-            aria-label={isHearted ? "Add to list" : "Remove from list"}
-            className={styles.heart}
-            onClick={toggleIsHearted}
-          >
-            {isHearted ? <HeartedIcon /> : <NotHeartedIcon />}
-          </button>
-          <p className={styles.title}>{animeTitle}</p>
-          <p className={styles.releaseDate}>{releaseDate}</p>
-        </div>
+        <button
+          aria-label={isHearted ? "Add to list" : "Remove from list"}
+          className={styles.heart}
+          onClick={toggleIsHearted}
+        >
+          {isHearted ? <HeartedIcon /> : <NotHeartedIcon />}
+        </button>
+        <p className={styles.title}>{animeTitle}</p>
+        <p className={styles.releaseDate}>{releaseDate}</p>
         <img src={animeImg} alt={animeTitle} />
       </div>
     </Link>

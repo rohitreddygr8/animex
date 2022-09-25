@@ -1,31 +1,14 @@
 import styles from "./navbar.module.scss";
-import SearchIcon from "@assets/icons/search.svg";
-import { useRef, useState } from "react";
-import { useDebounce } from "@hooks";
-import { SearchResults, UserAuth } from "@components";
+import { useState } from "react";
+import { Search, UserAuth } from "@components";
 import { Link } from "react-router-dom";
 import HeartedIcon from "@assets/icons/heart.svg";
 import MenuIcon from "@assets/icons/menu.svg";
 import RandomIcon from "@assets/icons/random.svg";
 
 export const Navbar = () => {
-  const [keyword, setKeyword] = useState("");
-  const [showResults, setShowResults] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuthPrompt, setShowAuthPrompt] = useState<"login" | "signup" | null>(null);
-  const searchBarRef = useRef<HTMLInputElement>(null);
-  const debouncedKeyword = useDebounce<string>({ value: keyword, delay: 400 });
-  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
-    setKeyword(e.currentTarget.value);
-  };
-  const hideResults = () => {
-    setTimeout(() => {
-      setShowResults(false);
-    }, 100);
-  };
-  const handleFocus = () => {
-    setShowResults(true);
-  };
 
   return (
     <div className={styles.navBar}>
@@ -52,17 +35,7 @@ export const Navbar = () => {
         </div>
       </div>
       <div>
-        <div className={styles.searchContainer}>
-          <div className={styles.searchBar} ref={searchBarRef}>
-            <input type="search" placeholder="Search" onInput={handleInput} onFocus={handleFocus} value={keyword} />
-            <button>
-              <SearchIcon />
-            </button>
-          </div>
-          {showResults && debouncedKeyword && (
-            <SearchResults keyword={debouncedKeyword} setShowResults={setShowResults} />
-          )}
-        </div>
+        <Search />
         <div className={styles.authButtons}>
           {isLoggedIn ? (
             <button className={styles.loginBtn}>Log out</button>
@@ -76,7 +49,6 @@ export const Navbar = () => {
               </button>
             </>
           )}
-
           {showAuthPrompt && (
             <div className={styles.authContainer} onClick={() => setShowAuthPrompt(null)}>
               <UserAuth authType={showAuthPrompt} />
