@@ -1,6 +1,6 @@
-import express from "express";
 import cors from "cors";
-import schema from "./graphql/schema.js";
+import express from "express";
+import { schema } from "./graphql/schema.js";
 import { proxyController } from "./controllers/proxy-controller.js";
 import { authController } from "./controllers/auth-controller.js";
 import { graphqlHTTP } from "express-graphql";

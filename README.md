@@ -1,4 +1,4 @@
-# animex
+# Animex
 
 Free anime streaming site made using react, typescript, graphql, and express.
 (Still in development 🚧)
