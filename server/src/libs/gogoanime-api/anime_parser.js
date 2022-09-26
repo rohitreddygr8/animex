@@ -3,10 +3,7 @@ import cheerio from "cheerio";
 import puppeteer from "puppeteer";
 import userAgent from "user-agents";
 
-import {
-  generateEncryptAjaxParameters,
-  decryptEncryptAjaxResponse,
-} from "./helpers/extractors/goload.js";
+import { generateEncryptAjaxParameters, decryptEncryptAjaxResponse } from "./helpers/extractors/goload.js";
 import { extractStreamSB } from "./helpers/extractors/streamsb.js";
 import { extractFembed } from "./helpers/extractors/fembed.js";
 import { USER_AGENT, renameKey } from "./utils.js";
@@ -109,9 +106,7 @@ export const scrapeStreamSB = async ({ id }) => {
     const epPage = await axios.get(BASE_URL2 + id);
     const $ = cheerio.load(epPage.data);
 
-    const server = $("div.anime_video_body > div.anime_muti_link > ul > li.streamsb > a").attr(
-      "data-video"
-    );
+    const server = $("div.anime_video_body > div.anime_muti_link > ul > li.streamsb > a").attr("data-video");
     const serverUrl = new URL(server);
 
     const res = await extractStreamSB(serverUrl.href);
@@ -317,10 +312,7 @@ export const scrapeTopAiringAnime = async ({ list = [], page = 1 }) => {
           list.push({
             animeId: $(el).find("a:nth-child(1)").attr("href").split("/")[2],
             animeTitle: $(el).find("a:nth-child(1)").attr("title"),
-            animeImg: $(el)
-              .find("a:nth-child(1) > div")
-              .attr("style")
-              .match("(https?://.*.(?:png|jpg))")[0],
+            animeImg: $(el).find("a:nth-child(1) > div").attr("style").match("(https?://.*.(?:png|jpg))")[0],
             latestEp: $(el).find("p:nth-child(4) > a").text().trim(),
             animeUrl: BASE_URL + "/" + $(el).find("a:nth-child(1)").attr("href"),
             genres: genres,
@@ -346,10 +338,7 @@ export const scrapeTopAiringAnime = async ({ list = [], page = 1 }) => {
       list.push({
         animeId: $(el).find("a:nth-child(1)").attr("href").split("/")[2],
         animeTitle: $(el).find("a:nth-child(1)").attr("title"),
-        animeImg: $(el)
-          .find("a:nth-child(1) > div")
-          .attr("style")
-          .match("(https?://.*.(?:png|jpg))")[0],
+        animeImg: $(el).find("a:nth-child(1) > div").attr("style").match("(https?://.*.(?:png|jpg))")[0],
         latestEp: $(el).find("p:nth-child(4) > a").text().trim(),
         animeUrl: BASE_URL + "/" + $(el).find("a:nth-child(1)").attr("href"),
         genres: genres,
@@ -413,9 +402,7 @@ export const scrapeAnimeDetails = async ({ id }) => {
     const animeImage = $("div.anime_info_body_bg > img").attr("src");
     const type = $("div.anime_info_body_bg > p:nth-child(4) > a").text();
     const desc = $("div.anime_info_body_bg > p:nth-child(5)").text().replace("Plot Summary: ", "");
-    const releasedDate = $("div.anime_info_body_bg > p:nth-child(7)")
-      .text()
-      .replace("Released: ", "");
+    const releasedDate = $("div.anime_info_body_bg > p:nth-child(7)").text().replace("Released: ", "");
     const status = $("div.anime_info_body_bg > p:nth-child(8) > a").text();
     const otherName = $("div.anime_info_body_bg > p:nth-child(9)")
       .text()
@@ -537,9 +524,7 @@ export const scrapeDownloadLinks = async ({ episodeId }) => {
 
     const $ = cheerio.load(e_page.data);
 
-    const d_link = $(`div.anime_video_body > div.download-anime > div > ul > li.dowloads > a`).attr(
-      "href"
-    );
+    const d_link = $(`div.anime_video_body > div.download-anime > div > ul > li.dowloads > a`).attr("href");
 
     const d_page = await browser.newPage();
     await d_page.setUserAgent(userAgent.toString());
@@ -558,9 +543,7 @@ export const scrapeDownloadLinks = async ({ episodeId }) => {
       d_links.map(async (obj, i) => {
         await axios
           .get(obj.url)
-          .catch(
-            (err) => (d_links.at(i).url = `${err.response.request._redirectable._options.href}`)
-          );
+          .catch((err) => (d_links.at(i).url = `${err.response.request._redirectable._options.href}`));
       })
     );
 

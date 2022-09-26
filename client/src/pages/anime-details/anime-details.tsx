@@ -47,7 +47,7 @@ export default function AnimeDetails() {
         <div className={styles.animeInfo}>
           <h2>{animeTitle}</h2>
           <div style={{ display: "flex" }}>
-            {genres.map((genre: string) => {
+            {genres?.map((genre: string) => {
               return <span key={genre}>{genre}</span>;
             })}
             <h4>{releasedDate}</h4>

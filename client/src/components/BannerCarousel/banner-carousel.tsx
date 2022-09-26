@@ -5,29 +5,10 @@ import InfoIcon from "@assets/icons/info.svg";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-export const BannerCarousel = ({ data }: { data: TopAiring[] }) => {
+export const BannerCarousel = ({ data }: { data: RecentReleases[] }) => {
   const bannerRef = useRef<HTMLDivElement | null>(null);
   const navButtonsRef = useRef<HTMLDivElement | null>(null);
   const [nthButtonColor, setNthButtonColor] = useState(0);
-
-  const query = `query getAnimeDetails($animeId:ID){
-    animeDetails(animeId:$animeId) {
-      animeTitle
-      animeImg
-      animeUrl
-      genres
-      type
-      releasedDate
-      status
-      synopsis
-      episodesList {
-      episodeId
-      episodeNum
-    }
-      totalEpisodes
-      otherNames
-  }
-}`;
 
   const scrollTowards = (direction: "left" | "right") => {
     bannerRef.current?.scrollBy({
@@ -64,7 +45,6 @@ export const BannerCarousel = ({ data }: { data: TopAiring[] }) => {
       clearInterval(intervalTimer);
     };
   }, []);
-
   return (
     <div className={styles.bannerCarousel}>
       <button onClick={() => scrollTowards("left")} className={styles.scrollBtn}>
@@ -77,7 +57,7 @@ export const BannerCarousel = ({ data }: { data: TopAiring[] }) => {
         {data.map((anime, i) => {
           return (
             <div
-              key={anime.animeId}
+              key={anime.episodeId}
               style={i === nthButtonColor ? { backgroundColor: "var(--coral-100)" } : { backgroundColor: "white" }}
             ></div>
           );
@@ -85,8 +65,11 @@ export const BannerCarousel = ({ data }: { data: TopAiring[] }) => {
       </div>
       <div className={styles.gallery} ref={bannerRef}>
         {data.map((anime) => {
+          const animeIdPieces = anime.episodeId.split("-");
+          const animeId = animeIdPieces.slice(0, animeIdPieces.length - 2).join("-");
+          const latestEpNum = anime.episodeNum.split("-").at(-1);
           return (
-            <div className={styles.banner} id={`${anime.animeId}-banner`} key={anime.animeId}>
+            <div className={styles.banner} id={`${anime.episodeId}-banner`} key={anime.episodeId}>
               <div
                 className={styles.bg}
                 style={{
@@ -95,7 +78,9 @@ export const BannerCarousel = ({ data }: { data: TopAiring[] }) => {
               ></div>
               <div className={styles.details}>
                 <p>{anime.animeTitle}</p>
-                <Link to={`/anime-details/${anime.animeId}`}>
+                <Link to={`/anime-details/${animeId}`}>
+                  <p className={styles.latestEp}>Latest episode: {latestEpNum}</p>
+                  <p className={styles.subOrDub}>{anime.subOrDub}</p>
                   <button className={styles.moreInfoBtn}>
                     <InfoIcon /> More info
                   </button>

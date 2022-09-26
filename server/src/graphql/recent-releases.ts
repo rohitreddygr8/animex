@@ -17,7 +17,7 @@ const RecentReleasesType = new GraphQLObjectType({
     },
     subOrDub: {
       type: GraphQLString,
-      resolve: (parent, _) => parent.episodeId,
+      resolve: (parent, _) => parent.subOrDub,
     },
     animeImg: {
       type: GraphQLString,

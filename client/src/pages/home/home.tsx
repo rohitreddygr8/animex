@@ -19,12 +19,13 @@ export default function Home() {
       animeUrl
       latestEp
     }
-    topAiring {
-      animeId
-      animeTitle
+    recentReleases {
+      episodeId
+      episodeNum
+      subOrDub
       animeImg
-      animeUrl
-      latestEp
+      episodeUrl
+      animeTitle
     }
 	}
 	`;
@@ -49,7 +50,7 @@ export default function Home() {
 
   return (
     <div className={styles.home}>
-      {/* <BannerCarousel data={data.topAiring} /> */}
+      {<BannerCarousel data={data.recentReleases} />}
       <section className={styles.section}>
         <p>Popular</p>
         <Carousel data={data.popular} />

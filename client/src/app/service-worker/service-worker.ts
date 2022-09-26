@@ -1,12 +1,11 @@
 declare const self: ServiceWorkerGlobalScope;
 
 export const serviceWorker = () => {
-  const cacheVersion = "v1";
+  const cacheVersion = "v10";
   const cacheName = `animex-cache-${cacheVersion}`;
-  const indexURL = new URL("/", import.meta.url);
 
   const cacheFirstThenFetch = async (req: Request) => {
-    const proxiedReq = req.mode == "navigate" ? indexURL : req;
+    const proxiedReq = req.mode == "navigate" ? location.origin : req;
     const cacheRes = await caches.match(proxiedReq);
     if (cacheRes) {
       return cacheRes;
@@ -41,7 +40,7 @@ export const serviceWorker = () => {
       "manifest",
     ];
     if (
-      e.request.url.includes(indexURL.hostname) &&
+      e.request.url.includes(location.origin) &&
       !e.request.url.includes("api") &&
       fileTypesToBeCached.includes(e.request.destination)
     ) {

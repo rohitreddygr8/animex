@@ -6,7 +6,7 @@
     "allowJs": true,
     "strict": true,
     "module": "ESNext",
-    "target": "ESNext",
+    "target": "ES2015",
     "removeComments": true,
     "preserveWatchOutput": false,
     "esModuleInterop": true,
@@ -20,14 +20,8 @@
     "noImplicitThis": true,
     "noEmitOnError": true,
     "outDir": "./dist",
-    "paths": {
-      "*": [
-        "../node_modules/*",
-        "./src/*"
-      ]
-    }
   },
   "include": [
-    "src/**/*",
+    "src",
   ]
 }

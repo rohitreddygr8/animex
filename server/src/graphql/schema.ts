@@ -52,9 +52,11 @@ const QueryType = new GraphQLObjectType({
       type: new GraphQLList(RecentReleasesType),
       description: "Gets a list of recently released anime.",
       args: {
-        genre: {
-          type: new GraphQLNonNull(GenreEnum),
+        type: {
+          type: GraphQLInt,
+          defaultValue: 1,
         },
+
         page: {
           type: GraphQLInt,
           defaultValue: 1,

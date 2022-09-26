@@ -9,7 +9,7 @@
     "noEmit": true,
     "strict": true,
     "module": "ESNext",
-    "target": "ES2017",
+    "target": "ESNext",
     "skipLibCheck": true,
     "removeComments": true,
     "esModuleInterop": true,

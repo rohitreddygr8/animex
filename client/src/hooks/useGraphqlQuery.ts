@@ -5,8 +5,8 @@ export const useGraphqlQuery = (
   query: { query: string; variables?: object },
   options?: Omit<UseQueryOptions<any, unknown, any, string[]>, "initialData" | "queryFn" | "queryKey">
 ) => {
-  const fetchGraphQL = async () => {
-    const API_ENDPOINT = import.meta.env.DEV ? `http://${location.hostname}:7000/api/graphql` : "/api/graphql";
+  const fetchGraphQL = async (query: { query: string; variables?: object }) => {
+    const API_ENDPOINT = import.meta.env.DEV ? `http://${location.hostname}:4000/api/graphql` : "/api/graphql";
 
     try {
       const res = await fetch(API_ENDPOINT, {
@@ -23,7 +23,7 @@ export const useGraphqlQuery = (
       console.log("ERROR: " + error);
     }
   };
-  return useQuery([querykey], fetchGraphQL, {
+  return useQuery([querykey], () => fetchGraphQL(query), {
     refetchOnWindowFocus: false,
     cacheTime: Infinity,
     ...options,

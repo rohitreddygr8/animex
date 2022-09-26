@@ -22,8 +22,7 @@ lerna-debug.log*
 node_modules
 
 # Dotenv environment variables file
-*.env
-*.env.test
+*.env*
 
 # Build output
 .next
@@ -36,4 +35,3 @@ dist-ssr
 
 # Miscellaneous
 *.local
-config

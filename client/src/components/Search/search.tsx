@@ -67,16 +67,15 @@ export const Search = () => {
       {keyword && showResults && (
         <div className={styles.searchResults}>
           {isLoading ? <LoaderIcon /> : !data?.search?.length && <p className={styles.noResults}>No results found</p>}
-          {data &&
-            data.search?.slice(0, 5).map((anime: any) => (
-              <div className={styles.result} onPointerDown={goToAnimeDetails} id={anime.animeId} key={anime.animeId}>
-                <img src={anime.animeImg} />
-                <div>
-                  <p className={styles.title}>{anime.animeTitle}</p>
-                  <p className={styles.status}>{anime.status}</p>
-                </div>
+          {data?.search?.slice(0, 5).map((anime: any) => (
+            <div className={styles.result} onPointerDown={goToAnimeDetails} id={anime.animeId} key={anime.animeId}>
+              <img src={anime.animeImg} />
+              <div>
+                <p className={styles.title}>{anime.animeTitle}</p>
+                <p className={styles.status}>{anime.status}</p>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       )}
     </div>

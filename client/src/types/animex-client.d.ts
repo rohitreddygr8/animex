@@ -47,3 +47,11 @@ interface TopAiring {
   animeUrl: string;
   latestEp: string;
 }
+interface RecentReleases {
+  animeImg: string;
+  animeTitle: string;
+  episodeId: string;
+  episodeNum: string;
+  subOrDub: string;
+  episodeUrl: string;
+}

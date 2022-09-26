@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import crypto, { webcrypto } from "node:crypto";
 
-export const authHandler: RequestHandler = (req, res) => {
+export const authController: RequestHandler = (req, res) => {
   const { username, password } = JSON.parse(req.body);
   const a = new Uint32Array(5);
   webcrypto.getRandomValues(a);

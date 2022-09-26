@@ -2,7 +2,7 @@ import { request, RequestOptions } from "https";
 import { RequestHandler } from "express";
 import { scrapeMP4 } from "../libs/gogoanime-api/anime_parser.js";
 
-const proxyHandler: RequestHandler = async (req, res) => {
+export const proxyController: RequestHandler = async (req, res) => {
   const { episodeId } = req.query;
   const response = await scrapeMP4({ id: episodeId });
   const referer = response.Referer;
@@ -21,5 +21,3 @@ const proxyHandler: RequestHandler = async (req, res) => {
   });
   proxyRequest.end();
 };
-
-export default proxyHandler;
