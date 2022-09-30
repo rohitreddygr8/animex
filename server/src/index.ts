@@ -1,33 +1,15 @@
 import cors from "cors";
 import express from "express";
-import { schema } from "./graphql/schema.js";
-import { proxyController } from "./controllers/proxy-controller.js";
-import { authController } from "./controllers/auth-controller.js";
-import { graphqlHTTP } from "express-graphql";
-import { wildcardController } from "./controllers/wildcard-controller.js";
 import { secrets } from "./utils/secrets.js";
 import { connectToDb } from "./utils/database.js";
+import { router } from "./router.js";
 
-const { PORT, HOST, NODE_ENV } = secrets;
-const server = express();
 connectToDb();
+const server = express();
+const { PORT, HOST, NODE_ENV } = secrets;
 
-server.use(cors(), express.text(), express.json(), express.static("../../client/dist/"));
-server.post("/api/graphql", graphqlHTTP({ schema }));
-server.post("/api/auth", authController);
-server.get("/api/proxy", proxyController);
-server.get("*", wildcardController);
-
-if (process.env.NODE_ENV === "development") {
-  server.get(
-    "/api/graphql",
-    graphqlHTTP({
-      schema,
-      pretty: true,
-      graphiql: { headerEditorEnabled: true },
-    })
-  );
-}
+server.use(cors(), express.static("../../client/dist/"));
+server.use("/api", router);
 
 server.listen(PORT, HOST, () => {
   const ENV = NODE_ENV === "development" ? `\u001b[33;1m${NODE_ENV}` : `\u001b[32;1m${NODE_ENV}`;

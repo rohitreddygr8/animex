@@ -1,0 +1,53 @@
+.user-profile {
+    --size: 2.5em;
+    --aspect-ratio: 1;
+    display: grid;
+    height: var(--size);
+    width: calc(var(--aspect-ratio) * var(--size));
+    border-radius: 50%;
+    overflow: hidden;
+
+    button {
+        height: 100%;
+        width: 100%;
+
+        svg {
+            fill: gray;
+        }
+    }
+}
+
+.options {
+    height: 100vh;
+    width: 25vw;
+    display: grid;
+    // place-items: center;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: var(--dark-blue-500);
+    transition: all 0.3s;
+
+    &.show {
+        transform: translateX(-100%);
+    }
+
+}
+
+.user {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.5em 1em;
+    height: 4em;
+    width: 100%;
+
+    img {
+        border-radius: 50%;
+    }
+
+    svg {
+        width: 4em;
+    }
+
+}

@@ -1,6 +1,6 @@
 .video-player {
-    width: 800px;
-    height: 500px;
+    width: max(400px, 60vw);
+    height: auto;
 }
 
 .play-btn {

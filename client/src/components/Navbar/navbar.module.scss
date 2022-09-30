@@ -59,9 +59,15 @@
     }
 }
 
+@media screen and (max-width:500px) {
+    .nav-bar {
+        justify-content: space-evenly;
+    }
+}
+
 .logo {
-    width: min(40vw, 12em);
-    height: 3em;
+    --height: 2.5em;
+    height: var(--height);
     min-height: 2em;
     margin: 0.75em;
     display: flex;
@@ -72,11 +78,11 @@
     font-size: 1.5em;
 
     img {
-        width: 3em;
+        height: clamp(1.5em, 5vw, var(--height));
     }
 
     p {
-        font-size: 2.25em;
+        font-size: clamp(1.5em, 5vw, var(--height));
         font-variation-settings: 'wght' 900;
     }
 

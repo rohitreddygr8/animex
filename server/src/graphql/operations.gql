@@ -1,0 +1,24 @@
+query homePageQuery {
+  popular {
+    animeId
+    animeTitle
+    animeImg
+    animeUrl
+    releaseDate
+  }
+  newSeasons {
+    animeId
+    animeTitle
+    animeImg
+    animeUrl
+    latestEp
+  }
+  recentReleases {
+    episodeId
+    episodeNum
+    subOrDub
+    animeImg
+    episodeUrl
+    animeTitle
+  }
+}

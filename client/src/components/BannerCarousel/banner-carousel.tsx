@@ -2,64 +2,56 @@ import styles from "./banner-carousel.module.scss";
 import ForwardIcon from "@assets/icons/chevron-forward-outline.svg";
 import BackIcon from "@assets/icons/chevron-back-outline.svg";
 import InfoIcon from "@assets/icons/info.svg";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useViewportSize } from "@hooks";
 
-export const BannerCarousel = ({ data }: { data: RecentReleases[] }) => {
+export const BannerCarousel = memo(({ data }: { data: RecentReleases[] }) => {
   const bannerRef = useRef<HTMLDivElement | null>(null);
-  const navButtonsRef = useRef<HTMLDivElement | null>(null);
-  const [nthButtonColor, setNthButtonColor] = useState(0);
+  const [currentBanner, setCurrentBanner] = useState(0);
+  const [viewportHeight, viewportWidth] = useViewportSize();
 
-  const scrollTowards = (direction: "left" | "right") => {
-    bannerRef.current?.scrollBy({
-      left: (direction === "left" ? -1 : 1) * bannerRef.current?.offsetWidth,
-    });
-    setNthButtonColor((state) => (direction === "left" ? state - 1 : state + 1));
+  const scrollToBanner = (n: number) => {
+    setCurrentBanner(n);
   };
 
-  const scrollRight = (i: number) => {
-    bannerRef.current?.scrollBy({
-      left: bannerRef.current?.offsetWidth,
-    });
-    setNthButtonColor(i);
-  };
-
-  const autoScroll = (timeout: number) => {
-    data.forEach((anime, i) => {
-      setTimeout(() => scrollRight(i), i * timeout);
-    });
-
-    setNthButtonColor(0);
-    setTimeout(() => {
-      bannerRef.current?.scrollTo({
-        left: 0,
-      });
-    });
+  const scrollBannerBy = (n: -1 | 1) => {
+    const num = (currentBanner + n < 0 ? data.length - 1 : currentBanner + n) % data.length;
+    setCurrentBanner(num);
   };
 
   useEffect(() => {
-    const timeout = 5000;
-    autoScroll(timeout);
-    let intervalTimer: NodeJS.Timer = setInterval(() => autoScroll(timeout), data.length * timeout);
+    bannerRef.current?.scrollTo({
+      left: currentBanner * bannerRef.current?.offsetWidth,
+    });
+  }, [currentBanner]);
+
+  useEffect(() => {
+    const scrollTimer = setInterval(() => {
+      setCurrentBanner((state) => (state + 1) % data.length);
+    }, 5000);
     return () => {
-      clearInterval(intervalTimer);
+      clearInterval(scrollTimer);
     };
-  }, []);
+  });
+
   return (
     <div className={styles.bannerCarousel}>
-      <button onClick={() => scrollTowards("left")} className={styles.scrollBtn}>
+      <button onClick={() => scrollBannerBy(-1)} className={styles.scrollBtn}>
         <BackIcon />
       </button>
-      <button onClick={() => scrollTowards("right")} className={styles.scrollBtn}>
+      <button onClick={() => scrollBannerBy(1)} className={styles.scrollBtn}>
         <ForwardIcon />
       </button>
       <div className={styles.navButtons}>
         {data.map((anime, i) => {
           return (
-            <div
+            <button
+              title={anime.animeTitle}
+              onClick={() => scrollToBanner(i)}
               key={anime.episodeId}
-              style={i === nthButtonColor ? { backgroundColor: "var(--coral-100)" } : { backgroundColor: "white" }}
-            ></div>
+              style={i === currentBanner ? { backgroundColor: "var(--coral-100)" } : { backgroundColor: "white" }}
+            ></button>
           );
         })}
       </div>
@@ -70,12 +62,7 @@ export const BannerCarousel = ({ data }: { data: RecentReleases[] }) => {
           const latestEpNum = anime.episodeNum.split("-").at(-1);
           return (
             <div className={styles.banner} id={`${anime.episodeId}-banner`} key={anime.episodeId}>
-              <div
-                className={styles.bg}
-                style={{
-                  backgroundImage: ` url(${anime.animeImg})`,
-                }}
-              ></div>
+              <img src={anime.animeImg} alt={animeId} className={styles.bg} />
               <div className={styles.details}>
                 <p>{anime.animeTitle}</p>
                 <Link to={`/anime-details/${animeId}`}>
@@ -92,4 +79,6 @@ export const BannerCarousel = ({ data }: { data: RecentReleases[] }) => {
       </div>
     </div>
   );
-};
+});
+
+BannerCarousel.displayName = "BannerCarousel";

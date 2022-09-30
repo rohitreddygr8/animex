@@ -1,7 +1,8 @@
 import styles from "./watch.module.scss";
-import { useGraphqlQuery } from "@hooks";
-import { Loader, VideoPlayer } from "@components";
+import { Loader, VideoPlayer, CommentSection } from "@components";
 import { useParams } from "react-router-dom";
+import { api } from "@utils";
+import { useQuery } from "@tanstack/react-query";
 
 interface IGetSource {
   watch: {
@@ -28,10 +29,18 @@ export default function Watch() {
   }
 }`;
 
-  const { data, isLoading, isError, error } = useGraphqlQuery("getSearchResults " + episodeId, {
-    query,
-    variables: { episodeId },
-  });
+  const { data, isLoading, isError, error } = useQuery(
+    ["watch", episodeId],
+    () =>
+      api.fetchGraphQL({
+        query,
+        variables: { episodeId },
+      }),
+    {
+      refetchOnWindowFocus: false,
+      cacheTime: Infinity,
+    }
+  );
 
   if (isError) {
     return <p style={{ backgroundColor: "red", color: "white" }}>Error</p>;
@@ -41,6 +50,7 @@ export default function Watch() {
     <div>
       {isLoading && <Loader />}
       {data && <VideoPlayer src={data.watch.data.sources[0].file} />}
+      {episodeId && <CommentSection episodeId={episodeId} />}
     </div>
   );
 }

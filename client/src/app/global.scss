@@ -1,4 +1,4 @@
-@use './config';
+@use './index';
 
 * {
     margin: 0;
@@ -14,9 +14,9 @@
     --dark-blue-500: #03122e;
     --purple-100: #824678;
     --violet-100: #3c2c4f;
-    --coral-100: #cc3838;
+    --coral-100: #e31c4e;
     --coral-200: #ae3956;
-    --dark: #0d131c;
+    --dark: #0a0e15;
 
     * {
         margin: 0;
@@ -58,6 +58,20 @@ svg {
     height: 100%;
     width: 100%;
     fill: currentColor;
+}
+
+input[type=search]::-ms-clear,
+input[type=search]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
 }
 
 @font-face {

@@ -1,10 +1,11 @@
 import { BannerCarousel, Carousel } from "@components";
-import { useGraphqlQuery } from "@hooks";
 import styles from "./home.module.scss";
 import LoaderIcon from "@assets/icons/loader.svg";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@utils";
 
 export default function Home() {
-  const homePageQuery = `query homePageQuery {
+  const query = `query homePageQuery {
 	  popular {
 	    animeId
 	    animeTitle
@@ -30,27 +31,22 @@ export default function Home() {
 	}
 	`;
 
-  const { data, isLoading, isError, error } = useGraphqlQuery("homePageQuery", { query: homePageQuery });
+  const { data, isLoading } = useQuery(["homePageQuery"], () => api.fetchGraphQL({ query }), {
+    refetchOnWindowFocus: false,
+    cacheTime: Infinity,
+  });
 
   if (isLoading) {
     return (
-      <div className={styles.home}>
-        {/* <BannerCarousel data={data.topAiring} /> */}
-        <section className={styles.section}>
-          <p>Popular</p>
-          <Carousel data={null} />
-        </section>
-        <section className={styles.section}>
-          <p>New Seasons</p>
-          <Carousel data={null} />
-        </section>
+      <div className={styles.loaderWrapper}>
+        <LoaderIcon />
       </div>
     );
   }
 
   return (
     <div className={styles.home}>
-      {<BannerCarousel data={data.recentReleases} />}
+      {<BannerCarousel data={data.recentReleases.slice(0, 12)} />}
       <section className={styles.section}>
         <p>Popular</p>
         <Carousel data={data.popular} />

@@ -1,8 +1,9 @@
 import styles from "./anime-details.module.scss";
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { useGraphqlQuery } from "@hooks";
-import { EpisodesList, Loader } from "@components";
+import { Carousel, EpisodesList, Loader } from "@components";
+import { api } from "@utils";
+import { useQuery } from "@tanstack/react-query";
 
 export default function AnimeDetails() {
   const { animeId } = useParams();
@@ -26,10 +27,19 @@ export default function AnimeDetails() {
   }
 }`;
 
-  const { data, isLoading, isError, error } = useGraphqlQuery("getDetails" + animeId, {
-    query,
-    variables: { animeId },
-  });
+  const { data, isLoading, isError, error } = useQuery(
+    ["anime-details", animeId],
+    () =>
+      api.fetchGraphQL({
+        query,
+        variables: { animeId },
+      }),
+    {
+      refetchOnWindowFocus: false,
+      cacheTime: Infinity,
+    }
+  );
+
   const episodesList = useMemo(() => data?.animeDetails?.episodesList, [data]);
 
   if (isError) {
@@ -57,6 +67,8 @@ export default function AnimeDetails() {
         </div>
       </div>
       <div className={styles.episodesList}>{episodesList && <EpisodesList episodesList={episodesList} />}</div>
+      <p>Similar anime</p>
+      {/* <Carousel data={}/> */}
     </div>
   );
 }

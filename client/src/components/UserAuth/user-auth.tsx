@@ -1,5 +1,5 @@
 import styles from "./user-auth.module.scss";
-import { fetchApi } from "@utils";
+import { api } from "@utils";
 import { useEffect, useRef, useState } from "react";
 import ShowPasswordIcon from "@assets/icons/show-password.svg";
 import HidePasswordIcon from "@assets/icons/hide-password.svg";
@@ -17,19 +17,19 @@ export const UserAuth = ({ authType }: { authType: "login" | "signup" }) => {
     e.preventDefault();
     const username = usernameRef.current?.value;
     const password = passwordRef.current?.value;
-    try {
-      if (username && password) {
-        const res = await fetchApi("/auth", {
-          method: "POST",
-          body: JSON.stringify({ username, password }),
-          headers: { Accept: "text/plain" },
-        });
-        const t = await res.text();
-        console.log(t);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    // try {
+    //   if (username && password) {
+    //     const res = await fetchApi("/auth", {
+    //       method: "POST",
+    //       body: JSON.stringify({ username, password }),
+    //       headers: { Accept: "text/plain" },
+    //     });
+    //     const t = await res.text();
+    //     console.log(t);
+    //   }
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   useEffect(() => {
