@@ -19,7 +19,7 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noEmitOnError": true,
-    "outDir": "./dist",
+    "outDir": "./dist"
   },
   "include": [
     "src",

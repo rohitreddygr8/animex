@@ -1,33 +1,109 @@
-.user-auth {
+.auth {
     background-color: var(--dark);
     height: 20em;
     width: max(20em, 40vw);
     border-radius: 1em;
-    display: grid;
-    place-items: center;
-
-
-    input {
-        all: unset;
-        font-variation-settings: 'wght' 500;
-        color: var(--coral-100);
-        background-color: transparent;
-        height: 2em;
-        width: 12em;
-    }
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
 
     .username,
     .password {
         display: flex;
+        justify-content: center;
         align-items: center;
         border-radius: 0.5em;
         border: 2px solid var(--coral-100);
         padding: 0.5em 1em;
+        height: 100%;
+        width: 15em;
+        position: relative;
+
+        input {
+            all: unset;
+            font-variation-settings: 'wght' 500;
+            color: var(--coral-100);
+            background-color: transparent;
+            height: 100%;
+            width: 100%;
+            font-size: 1.25em;
+
+
+
+            &[type="password"] {
+                font: small-caption;
+                font-size: 1.25em;
+                letter-spacing: -2px;
+
+                &::placeholder {
+                    font-family: 'Inter';
+                    font-variation-settings: 'wght' 500;
+                    letter-spacing: 0;
+                }
+            }
+        }
+
+        span {
+            position: absolute;
+            pointer-events: none;
+            left: 0;
+            top: 0;
+            font-size: 1.25em;
+            color: var(--coral-100);
+            font-variation-settings: 'wght' 500;
+            margin: 0.5em 1em;
+            opacity: 0.8;
+            transition: all 0.2s;
+        }
+
+        input:where(:focus, :valid) + span {
+            font-size: 0.75em;
+            margin: 0 0.75em;
+            padding: 0 0.75em;
+            opacity: 1;
+            background-color: var(--dark);
+            transform: translateY(-50%);
+        }
 
         button {
-            height: 1.5em;
-            width: 1.5em;
+            height: 100%;
+            padding: 0.25em 0;
+        }
+
+
+    }
+
+    .login-btn {
+        font-size: 1.5em;
+        padding: 0.5em 1.5em;
+        border-radius: 0.5em;
+        font-variation-settings: 'wght' 700;
+        color: var(--dark);
+        background-color: var(--coral-100);
+    }
+
+    .sign-up {
+        font-size: 0.75em;
+
+        button {
+            color: var(--coral-100);
+            padding: 0.25em 0.5em;
+            background-color: transparent;
         }
     }
 
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    height: 3em;
+    gap: 1em;
+
+    svg {
+        height: 1.75em;
+        fill: grey;
+    }
 }

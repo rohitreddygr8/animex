@@ -4,7 +4,7 @@ import LoaderIcon from "@assets/icons/loader.svg";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@utils";
 
-export default function Home() {
+export const Home = () => {
   const query = `query homePageQuery {
 	  popular {
 	    animeId
@@ -57,4 +57,4 @@ export default function Home() {
       </section>
     </div>
   );
-}
+};

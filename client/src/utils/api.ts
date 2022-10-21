@@ -3,7 +3,8 @@ import { getRandomInt } from "./random";
 class ApiAdaptor {
   API_ENDPOINT = import.meta.env.DEV ? `http://${location.hostname}:4000/api` : "/api";
 
-  fetchApi = (relativeUrl: string, init?: RequestInit | undefined) => fetch(this.API_ENDPOINT + relativeUrl, init);
+  fetchApi = (relativeUrl: string, init?: RequestInit | undefined) =>
+    fetch(this.API_ENDPOINT + relativeUrl, { credentials: "include", ...init });
 
   fetchGraphQL = async ({ query, variables }: { query: string; variables?: object }) => {
     const res = await this.fetchApi("/graphql", {
@@ -31,6 +32,22 @@ class ApiAdaptor {
     const data = await res.blob();
     const imgSrc = URL.createObjectURL(data);
     return imgSrc;
+  };
+
+  addToWatchList = async (animeId: string) => {
+    const res = await this.fetchApi("/watch-list", { body: animeId, method: "POST" });
+    alert(await res.status);
+  };
+
+  removeFromWatchList = async (animeId: string) => {
+    const res = await this.fetchApi("/watch-list", { body: animeId, method: "DELETE" });
+    alert(await res.text());
+  };
+
+  getWatchList = async () => {
+    const res = await this.fetchApi(`/watch-list`);
+    const data = await res.text();
+    return data;
   };
 }
 

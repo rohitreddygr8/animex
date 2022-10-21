@@ -1,22 +1,51 @@
 import styles from "./navbar.module.scss";
-import { useState } from "react";
-import { Search, UserAuth, UserProfile } from "@components";
+import { useLayoutEffect, useState } from "react";
+import { Search, UserAuth } from "@components";
 import { Link } from "react-router-dom";
 import HeartedIcon from "@assets/icons/heart.svg";
 import MenuIcon from "@assets/icons/menu.svg";
 import RandomIcon from "@assets/icons/random.svg";
+import UserIcon from "@assets/icons/user.svg";
 import Logo from "@assets/icons/animex.png";
 import { useViewportSize } from "@hooks";
+import { api } from "@utils";
 
 export const Navbar = () => {
   const [viewportHeight, viewportWidth] = useViewportSize();
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showAuthPrompt, setShowAuthPrompt] = useState<"login" | "signup" | null>(null);
+  const [avatarSrc, setAvatarSrc] = useState<string | null>(null);
+
+  const getAvatar = async () => {
+    const url = await api.getRandomAvatar();
+    setAvatarSrc(url);
+  };
+
+  const hideAuth = () => {
+    setShowAuthPrompt(false);
+  };
+
+  useLayoutEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    }
+    getAvatar();
+
+    window.onkeydown = (e) => {
+      if (e.key === "Escape" && showAuthPrompt) {
+        setShowAuthPrompt(false);
+      }
+    };
+
+    return () => {
+      window.onkeydown = null;
+    };
+  }, []);
 
   return (
     <div className={styles.navBar}>
       <div>
-        <Link to={"/"}>
+        <Link to="/">
           <div aria-label="Animex Logo" className={styles.logo}>
             <img src={Logo} alt="Animex Icon" />
             {viewportWidth > 500 && <p>animex</p>}
@@ -24,10 +53,12 @@ export const Navbar = () => {
         </Link>
         {viewportWidth > 500 && (
           <div className={styles.options}>
-            <button>
-              <HeartedIcon />
-              Liked
-            </button>
+            <Link to="/watch-list">
+              <button>
+                <HeartedIcon />
+                Liked
+              </button>
+            </Link>
             <button>
               <MenuIcon />
               Genre
@@ -41,28 +72,14 @@ export const Navbar = () => {
       </div>
       <div>
         <Search />
-        {/* {viewportWidth > 500 && (
-          <div className={styles.authButtons}>
-            {isLoggedIn ? (
-              <button className={styles.loginBtn}>Log out</button>
-            ) : (
-              <>
-                <button className={styles.loginBtn} onClick={() => setShowAuthPrompt("login")}>
-                  Log In
-                </button>
-                <button className={styles.signupBtn} onClick={() => setShowAuthPrompt("signup")}>
-                  Sign Up
-                </button>
-              </>
-            )}
-            {showAuthPrompt && (
-              <div className={styles.authContainer} onClick={() => setShowAuthPrompt(null)}>
-                <UserAuth authType={showAuthPrompt} />
-              </div>
-            )}
+        <button onClick={() => setShowAuthPrompt((state) => !state)} className={styles.profilePic}>
+          {avatarSrc ? <img src={avatarSrc} alt="" /> : <UserIcon />}
+        </button>
+        {showAuthPrompt && (
+          <div className={styles.authContainer} onClick={hideAuth}>
+            <UserAuth authType="signup" />
           </div>
-        )} */}
-        <UserProfile />
+        )}
       </div>
     </div>
   );

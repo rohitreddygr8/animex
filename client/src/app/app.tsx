@@ -1,20 +1,8 @@
 import "./global.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lazy, ReactNode, Suspense } from "react";
-import { Navbar } from "@components";
-const Home = lazy(() => import("../pages/home/home"));
-const Watch = lazy(() => import("../pages/watch/watch"));
-const AnimeDetails = lazy(() => import("../pages/anime-details/anime-details"));
-
-const LayoutSuspense = ({ children }: { children: ReactNode }) => {
-  return (
-    <>
-      <Navbar />
-      <Suspense>{children}</Suspense>
-    </>
-  );
-};
+import { Layout } from "@components";
+import { AnimeDetails, Home, Watch, WatchList } from "@pages";
 
 export const App = () => {
   const queryClient = new QueryClient();
@@ -23,9 +11,10 @@ export const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LayoutSuspense children={<Home />} />} />
-          <Route path="/anime-details/:animeId" element={<LayoutSuspense children={<AnimeDetails />} />} />
-          <Route path="/watch/:episodeId" element={<LayoutSuspense children={<Watch />} />} />
+          <Route path="/" element={<Layout children={<Home />} />} />
+          <Route path="/anime-details/:animeId" element={<Layout children={<AnimeDetails />} />} />
+          <Route path="/watch/:episodeId" element={<Layout children={<Watch />} />} />
+          <Route path="/watch-list" element={<Layout children={<WatchList />} />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

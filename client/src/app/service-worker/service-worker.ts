@@ -1,7 +1,7 @@
 declare const self: ServiceWorkerGlobalScope;
 
 export const serviceWorker = () => {
-  const cacheVersion = "v10";
+  const cacheVersion = "v1";
   const cacheName = `animex-cache-${cacheVersion}`;
 
   const cacheFirstThenFetch = async (req: Request) => {

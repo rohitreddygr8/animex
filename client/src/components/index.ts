@@ -9,7 +9,5 @@ export * from "./Loader/loader";
 export * from "./Navbar/navbar";
 export * from "./SideBar/side-bar";
 export * from "./UserAuth/user-auth";
-export * from "./UserProfile/user-profile";
 export * from "./VideoPlayer/video-player";
 export * from "./Search/search";
-export * from "./SearchResults/search-results";

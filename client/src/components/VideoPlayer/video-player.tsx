@@ -11,19 +11,26 @@ export const VideoPlayer = ({ src }: { src: string }) => {
   let loadingTimeout: NodeJS.Timeout | null = null;
   useEffect(() => {
     if (player) {
-      player.onprogress = () => {
-        setIsLoading(true);
-      };
+      // player.onprogress = () => {
+      //   setIsLoading(true);
+      // };
 
+      // player.onwaiting = () => {
+      //   loadingTimeout = setTimeout(() => {
+      //     setIsLoading(true);
+      //   }, 500);
+      // };
+      // player.onplaying = () => {
+      //   if (loadingTimeout) {
+      //     clearTimeout(loadingTimeout);
+      //   }
+      //   setIsLoading(false);
+      // };
       player.onwaiting = () => {
-        loadingTimeout = setTimeout(() => {
-          setIsLoading(true);
-        }, 500);
+        setIsLoading(true);
+        alert();
       };
       player.onplaying = () => {
-        if (loadingTimeout) {
-          clearTimeout(loadingTimeout);
-        }
         setIsLoading(false);
       };
     }
@@ -37,11 +44,11 @@ export const VideoPlayer = ({ src }: { src: string }) => {
 
   return (
     <div className={styles.videoContainer}>
-      {/* {isLoading && (
+      {isLoading && (
         <div className={styles.loader}>
           <LoaderIcon />
         </div>
-      )} */}
+      )}
       <HlsPlayer src={src} controls playerRef={playerRef} className={styles.videoPlayer} />
     </div>
   );

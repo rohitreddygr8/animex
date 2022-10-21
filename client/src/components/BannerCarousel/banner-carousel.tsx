@@ -29,7 +29,7 @@ export const BannerCarousel = memo(({ data }: { data: RecentReleases[] }) => {
   useEffect(() => {
     const scrollTimer = setInterval(() => {
       setCurrentBanner((state) => (state + 1) % data.length);
-    }, 5000);
+    }, 7000);
     return () => {
       clearInterval(scrollTimer);
     };
@@ -65,9 +65,9 @@ export const BannerCarousel = memo(({ data }: { data: RecentReleases[] }) => {
               <img src={anime.animeImg} alt={animeId} className={styles.bg} />
               <div className={styles.details}>
                 <p>{anime.animeTitle}</p>
+                <p className={styles.subOrDub}>{anime.subOrDub}</p>
                 <Link to={`/anime-details/${animeId}`}>
                   <p className={styles.latestEp}>Latest episode: {latestEpNum}</p>
-                  <p className={styles.subOrDub}>{anime.subOrDub}</p>
                   <button className={styles.moreInfoBtn}>
                     <InfoIcon /> More info
                   </button>
