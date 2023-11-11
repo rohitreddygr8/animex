@@ -32,7 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "@tanstack/react-query": "^4.0.10",
-    "axios": "^0.27.2",
+    "axios": "^1.6.0",
     "binascii": "^0.0.2",
     "cheerio": "^1.0.0-rc.10",
     "cookie-parser": "^1.4.6",
